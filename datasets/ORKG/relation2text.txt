@@ -1,0 +1,2634 @@
+P1	yields
+P2	employs
+P0	addresses
+P3	is a
+P4	refers to
+P5	uses
+P6	author
+P7	affiliation
+P8	email
+P9	ORCID
+P10	DOI
+P11	problem
+P12	solution
+P13	use case
+P14	description
+P15	implementation
+P16	has
+P17	has part
+P18	part of
+P19	input
+P20	output
+P21	programming language
+P22	environment
+P23	defines
+P24	field
+P25	web site
+P26	has doi
+P27	has author
+P28	has publication month
+P29	has publication year
+P30	has research field
+P31	has contribution
+P32	has research problem
+P33	approach
+P34	evaluation
+P35	implementation
+P36	has subfield
+P5000	Heuristic followed
+P5001	deals with
+P5002	uses similarity
+P5003	Performance metric
+P5004	Evidence
+P5005	Uncertainty
+P5006	Limitations
+P5007	Clustering
+P5008	Graph
+P1000	uses library
+P1001	uses graph
+P1002	uses framework
+P1003	url
+P1004	model
+P1005	method
+P1006	result
+P1007	experiment
+P1008	conducted at
+P1009	participants
+P2000	robotised the workflow
+P2001	Algorithm
+P2002	Stable
+P2003	Best complexity
+P2004	Worst complexity
+P2005	dataset
+P2006	metric
+P2007	presents
+P4005	code List
+P2008	Formalization
+P2009	Formalization
+P3000	keywords
+P4004	dimension
+P4007	structure
+P4003	has specified output
+P4006	measure
+P3001	Feature extraction
+P3002	Feature selection
+P3003	Classification
+P3004	Precision
+P3005	Sensitivity
+P3006	Specificity
+P3007	propose
+P4045	SASD
+P4046	SADASdAD
+P4000	R4001
+P4001	label
+P4002	R4009
+HAS_EVALUATION	Has evaluation
+HAS_APPROACH	Has approach
+HAS_METHOD	Has method
+HAS_IMPLEMENTATION	Has implementation
+HAS_RESULTS	Has result
+HAS_VALUE	Has value
+HAS_METRIC	Has metric
+P4008	component
+P4009	has value specification
+P4010	top Concept Of
+P4011	in Scheme
+P4012	type
+P4013	Range
+P4014	has specified numeric value
+P4015	has specified input
+P4018	Process
+P4016	Material
+P4017	Data
+P4019	Company
+P4020	MAPE
+P4021	MAE
+P4022	Institution
+P4023	Person
+P4024	Challenge
+P4025	from Chartered Institute of Library and Information Professional’s Library and Information Gazette
+P4026	over the period May 2006-2007
+P4027	research skills
+P4028	customer service
+P4029	interpersonal skills
+P4030	communication skills
+P4031	general computing skills
+P4032	between advertisements and Information National Training Organisation and Library and Information Management Employability Skills
+P4033	available
+P4034	is
+P4035	between
+P4036	using
+P4037	listing
+P4038	could be applicated to
+P4039	is
+P4040	between
+P4041	using
+P4042	listing
+P4043	could be applicated to
+P4044	restricted to
+P4047	has size
+P4048	from
+P4049	has vertices
+P4050	Has edges
+P4051	provided by
+P4052	is independent of
+P4053	is about
+P4054	based on
+P4055	Has sample size
+P4056	has methodology
+P4057	Planung
+P4058	Aktivität
+P4059	Has url
+P4060	capable of
+P4061	is dependent of
+P4062	showing
+P4063	detecting
+P4064	providing
+P4065	finding
+P4066	employing
+P4067	leveraging
+P4068	recognizing and normalizing
+P4069	attaining
+P4070	required skills for high-level staticians are
+P4071	Jobs for lower level staticians are restricted to
+P4072	sdfdasfsdfsf
+P4073	fastText
+P4074	Multipartite Rank
+P4075	users
+P4076	describes
+P4077	source code
+P4078	Information science
+type	type
+icon	icon
+description	description
+url	url
+MATERIAL	Material
+METHOD	Method
+PROCESS	Process
+DATA	Data
+HAS_ORCID	Has ORCID
+onHomepage	onHomepage
+P5009	Task
+P5010	Test questions
+P5011	Train questions
+P5012	Question language
+P5013	Language
+P5014	Question amount
+P5015	Recall
+P5016	F-measure
+P5017	Runtime
+P5018	On
+P5019	Technique
+P5020	Question analysis task
+P5021	Phrase mapping task
+P5022	Disambiguation task
+P5023	Query construction task
+P5024	Keyword
+P5025	Filter
+P5026	Sampling
+P5027	Aggregation
+P5028	Incremental
+P5029	Disk
+P5030	Domain
+P5031	Application type
+P5032	Data types
+P5033	Visualization types
+P5034	User recommendation
+P5035	Preferences
+P5036	Statistics
+P5037	Sampling
+P5038	Aggregation
+P5039	Incremental
+P5040	Disk
+P5041	Domain
+P5042	Application type
+P5099	R6900
+P5100	R6904
+P7000	has material
+P5043	Approach type
+P5044	Document type
+P5045	Summary usage
+P5046	Summary characteristics
+P5047	utilizes
+P5048	sub system
+P5049	location
+P5050	see also
+P5051	manufacturer
+P5052	Webrosensor Oy
+P5053	observes
+P5054	vibration
+P5055	WBS CM301 Datasheet
+P5056	datasheet
+P5057	Accelerometer vibration sensor (sd1)
+P5058	Accelerometer vibration sensor (sd2)
+P5059	Accelerometer vibration sensor (sd3)
+P5060	AXIS 211W Wireless Network Camera
+P5061	AXIS Communications
+P5062	AXIS 211W Datasheet
+P5063	A sensor network
+P5064	website
+P5065	Situation Theory Ontology
+P5066	Waikato Environment for Knowledge Analysis
+P5067	version
+P5068	acronym
+P5069	Observation
+P5070	class
+P5071	sensor
+P5072	precision
+P5073	recall
+P5074	actual
+P5075	predicted
+P5076	instances
+P5077	Apache Jena
+P5078	Semantic Web Rule Language
+P5079	Apache Cassandra
+P5080	Apache Storm
+P5081	purpose
+P5082	operation
+P5083	mode
+P5084	Labelled Data
+P5085	has part
+P5086	value
+P5087	number of hidden neurons
+P5088	classes
+P5089	algorithm
+P5090	configuration
+P5091	evaluation
+P5092	is property of
+P5093	pavement
+P5094	label
+P5095	class mappings
+P5096	rule
+P5097	performance
+P5098	time
+P7002	has user license
+P7007	in presence of
+P7009	Supports RDF
+P7010	Uses graph store
+P7011	Performed at
+P7012	Cohort size
+P7013	Has formula
+P7014	Demo video
+P7015	Architecture
+P7016	Figure
+P5101	R6906
+P5102	R6908
+P5103	order
+P5104	R6915
+P5105	R6918
+P5108	R6933
+P5106	R6926
+P5107	R6928
+P5109	R6935
+P5110	R6938
+P5111	R6939
+P7044	Has video
+P6000	material & methods
+P6001	results
+P6002	Results
+P6003	has ingredient
+P6004	has property
+P7001	wha
+P7003	has number
+P7004	has unit
+P7005	targeting
+P7008	by using
+P7006	state of research
+P7045	Related video
+P7017	R8136
+P7018	R8138
+P7019	R8141
+P7020	R8145
+P7021	R8148
+P7022	R8150
+P7023	R8156
+P7024	R8160
+P7025	R8167
+P7026	R8168
+P7027	R8169
+P7028	R8171
+P7029	R8176
+P7030	R8179
+P7031	R8183
+P7032	R8180
+P7033	Material
+P7034	Ontology
+P7035	Full name
+P7036	Example class
+P7037	Description
+P7038	Class count
+P7039	Object property count
+P7040	Data property count
+P7041	Uses ontology
+P7042	IRI
+P7043	Website
+P15018	Implemented into real vehicle
+P15003	has source
+P15004	Quick summary
+P15005	Features used and feature selection
+P15006	Machine learning algorithms
+P7046	Semantic representation
+P7047	Scope
+P7048	Prospective/retrospective
+P7049	Acquisition
+P7050	Metadata
+P7051	High level claims
+P7052	Supports research data
+P7053	Natural language statements
+P7054	Discourse
+P7055	Data type
+P7056	Knowledge representation
+P15026	Lemmas
+P15027	# Entries
+P15028	Labels
+P15029	Tested for SA
+P15030	POS Tags
+P15031	MSA
+P15032	Dialect
+P15033	Emoticons
+P15034	Availability
+P7078	has object
+P7079	Investigates
+P7080	Uses technique
+P7081	Analyzed for features
+P7067	deployed in
+P7069	measured by
+P7073	uses tool
+P7074	Used for
+P7075	has outcome
+P7076	Addressed by
+P7077	has objective
+P7057	has subProblem
+P7058	Results from
+P7059	Functions identical to
+P7060	Results in
+P7061	has characteristic
+P7062	achieved by
+P7063	establishes
+P7064	has length
+P7065	has feature
+P7066	has function
+P7068	Measures
+P7113	has quality
+P7070	has duration
+P7071	Has finding
+P7072	has conclusion
+P7092	Operates in
+P7093	lower than
+P7082	Implemented as
+P7098	has participants characteristic
+P7099	has data
+P7100	has evidence
+P7137	Has horizontal resolution
+P7138	Artificial island
+P7139	Finite differences
+P7140	Arakawa B-grid
+P7083	Analyses of
+P7084	Observed in
+P7085	has observations
+P7086	includes
+P7087	has disposition
+P7088	At time period
+P7089	has cause
+P7090	replaced by
+P7091	Includes analysis of
+P7094	applied to
+P7095	produces
+P7096	confirmed by
+P7097	revealed by
+P7102	has reference
+P7103	method applied to
+P7109	Process
+P7108	realizes
+P7101	has elements
+P7121	Model Family
+P7105	method applied to collagen fiber yields staining result
+P7106	method applied to filament yields staining result
+P7107	method applied to unit membranes yields staining result
+P7120	Has Prognostic Variable
+P7146	has species
+P7104	method applied to elastin yields staining result
+P7112	has version
+P7119	Scheme method
+P7110	Global Climate Model
+P7111	has name
+P7118	tripolar grid
+P7114	has documentation
+P7115	Has Horizontal Discretization
+P7116	River Routing
+P7127	The Northern Hemisphere geographical distribution of sea ice (1979-1998) is generally well simulated, particularly in winter
+P7128	The total Arctic sea ice extent is underestimated from August to November in CNRM-CM5.1 due to a significant underestimation of sea ice off Alaska and over the eastern part of the Siberian basin
+P7131	Total Arctic sea ice extent
+P7117	Pole Treatment
+P7135	has horizontal resolution
+P7125	Global Annual Mean Surface salinity differences (1960–1999): -0.54 psu, rms=0.83 psu
+P7129	The simulated Antarctic sea ice extent is underestimated by 1.6 x 10^6 km^2 in September
+P7130	Simulated Antarctic sea ice extent
+P7123	drift of sea level height
+P7124	realistic energy budget
+P7126	Global Annual Mean Surface salinity differences (1960–1999): -0.54 psu, rms=0.83 psu
+P7122	has spatial resolution
+P7132	Sea ice off Alaska
+P7133	Sea ice over the eastern part of the Siberian Basin
+P7134	cytoplasm
+P7136	Coupling With Atmosphere
+P7142	spectral
+P7143	Centered finite differences
+P7141	FTW
+P7144	Earth System Model
+P7145	Carbon Cycle
+P7147	sequencing platform
+P7148	reads per run
+P7149	read length in base pairs (paired-end*)
+P7150	reads per run in Million
+P7151	runtime in days
+P7153	data output rate in Gigabyte per day
+P7156	cost of resequencing a human genome with 30X coverage in $
+P7190	RMSE of global mean surface air temperature against ERA-Interim reanalysis
+P7154	reagents cost in $
+P7157	cost of machine in $
+P7152	total data output yield in Gigabyte
+P7155	cost per Gigabyte data output in $
+P7159	Basic Approximations
+P7158	Has scheme
+P7160	Fixed grid
+P7161	Centered finite differences
+P7162	Fixed grid
+P7163	major ice sheets
+P7164	static ice
+P7165	Minor ice caps
+P7166	The horizontal discretisation is on an orthogonal curvilinear grid nominally one degree for both longitude and latitude. refinements: (1) a tripolar grid north of 65°N ; (2) a cosine dependent (Mercator) grid  south of 30°S; (3) a refinement of latitudinal spacing to 1/3°  between 10°S and 10°N
+P7168	even coverage
+P7169	well resolved
+P7170	not stained
+P7167	has application
+P15012	Tested various designs
+P15020	OfflineDatabase
+P7171	poorly resolved
+P15023	Advantages
+P15024	Disadvantages
+P7172	Oki T., and Y.C. Sud (1998) Design of the Total Runoff Integrating Pathways [TRIP] - A global river channel network.. Earth Interactions, 2.       Add to Favorites Track Citation Download Citation Email   https://doi.org/10.1175/1087-3562(1998)002<0001:DOTRIP>2.3.CO;2
+P7173	Cold deep snow albedo
+P7174	Bare ice albedo
+P7175	Melting deep snow albedo
+P7176	The horizontal discretisation is on an orthogonal curvilinear grid nominally one degree for both longitude and latitude. It has the following refinements: (1) a tripolar grid (Murray 1996) is used north of 65°N to preclude a singularity at the geographical north pole; (2) a cosine dependent (Mercator) grid is used south of 30°S to avoid large grid cell aspect ratios and also to better resolve zonal currents in the Southern Ocean and at the Antarctic margin; and, (3) a refinement of latitudinal spacing to 1/3° is applied between 10°S and 10°N to better resolve predominantly zonal equatorial ocean currents.
+P7177	The horizontal discretisation is on an orthogonal curvilinear grid nominally one degree for both longitude and latitude. It has the following refinements: (1) a tripolar grid (Murray 1996) is used north of 65°N to preclude a singularity at the geographical north pole; (2) a cosine dependent (Mercator) grid is used south of 30°S to avoid large grid cell aspect ratios and also to better resolve zonal currents in the Southern Ocean and at the Antarctic margin; and, (3) a refinement of latitudinal spacing to 1/3° is applied between 10°S and 10°N to better resolve predominantly zonal equatorial ocean currents.
+P7178	Vertical Physics
+P7179	Critical Richardson number
+P7180	Radiation scheme
+P7184	Surface Air Temperature
+P7185	0.04 °C
+P7186	0.35 °C
+P7187	bias of global mean surface air temperature
+P7188	RMSE of global mean surface air temperature
+P7181	Edwards, J.M. and A. Slingo (1996) Studies with a flexible new radiation code. I: choosing a configuration for a large-scale model Q. J. R. Meteorol. Soc., 122, 689-720
+P7182	Edwards, J.M. and A. Slingo (1996) Studies with a flexible new radiation code. I: choosing a configuration for a large-scale model Q. J. R. Meteorol. Soc., 122, 689-720
+P7183	Tripleclouds scheme
+P7189	Bias of global mean surface air temperature against ERA-Interim reanalysis
+P15021	Classifier
+P7191	Bias of mean surface temperature over northern hemisphere land against ERA-Interim reanalysis:
+P7192	Bias of mean surface temperature over high latitudes Southern Ocean (>60°)  against ERA-Interim reanalysis
+P7193	Bias of mean surface temperature over high latitudes Southern Ocean (>60°) against ERA-Interim reanalysis
+P7194	Bias of global mean precipitation against GPCP climatology
+P7195	Cloud scheme
+P7200	sea-ice volume trend
+P7201	Sea-ice volume trend in the northern hemisphere
+P7202	Sea-ice volume trend in the southern hemisphere
+P7203	Sea-ice volume trend in the northern hemisphere
+P7204	Trend of SST
+P7205	Bias of global mean SST
+P7196	Bias of northern hemisphere (0°-60°N) annual mean cloud amount against the D2 ISCCP observations
+P7197	Bias of northern hemisphere (0°-60°N) annual mean cloud amount against the D2 ISCCP observations
+P7198	Bias of southern hemisphere (60°S-0°) annual mean cloud amount against the D2 ISCCP observations
+P7199	Bias of southern hemisphere (60°S-0°) annual mean cloud amount against the D2 ISCCP observations
+P7208	Scheme Type
+P7206	Bias of global mean SSS against the WOA2009 data
+P15011	Interview, Survey or Brainstorming
+P7207	Dynamical Core
+P7209	1.4°
+P7211	Ontology
+P7212	Full name
+P7213	Example class
+P7214	Description
+P7215	Class count
+P7216	Object property count
+P7217	Data property count
+P7218	Uses ontology
+P7210	Solution
+P7221	Ontology
+P7222	Full name
+P7223	Example class
+P7224	Description
+P7225	Class count
+P7226	Object property count
+P7227	Data property count
+P7228	Uses ontology
+P7229	IRI
+P7219	IRI
+P7220	Website
+P7230	Website
+P15019	FeatureExtraction
+SAME_AS	same as
+HAS_VENUE	Has venue
+reference	reference
+P8006	1.4 °
+TemplateSub	Template sub-template
+P15022	Algorithm name
+P8000	applies
+P8001	proposes
+P8002	are based on
+P8003	are defined by
+P8004	extracts
+P8005	scales up
+TemplateOfResearchField	Template of research field
+TemplateOfPredicate	Template of predicate
+TemplateOfClass	Template of class
+P9003	value specification
+P9004	specified numeric value
+P28000	Radiant energy input
+P9000	has study design dependent variable
+P9001	has dataset
+TemplateSubTemplate	Template sub-template
+TemplateOfResearchProblem	Template of research problem
+TemplateComponent	Template component
+TemplateComponentProperty	Template component property
+TemplateComponentValue	Template component value
+P9002	has p-value
+P9005	study design dependent variable
+P9006	p-value
+P9008	Modality
+P9007	CPLEX
+P9009	Pretrained model
+P9010	Clustering method
+P9011	mean Average Precision
+P15025	Lexicon
+P9013	R@1
+P9014	Image-to-Text Retrieval
+P9015	Text-to-Image Retrieval
+P9012	image to text retrieval
+P9022	electrolyte
+P9016	R@10
+P9017	Median Rank
+P9021	Visual
+P9018	Has model
+P9019	Has heuristic
+P9020	Has exact solution method
+P9023	has instance
+P9024	Source
+P9025	has system specification
+P9026	has performance
+P9027	Has experimental datasets
+P9028	has evaluation score
+P9031	Has experimental datasets
+P9032	has evaluation score
+P9029	Has experimental datasets
+P9030	has evaluation score
+P9057	has age
+P9058	has gender
+P9059	has illness
+P9060	date of illness onset
+P9061	date of hospital admission
+P9033	Has experimental datasets
+P9034	has evaluation score
+P9040	Study date
+P9041	Methods
+P9042	Approaches
+P9035	Has experimental datasets
+P9036	has evaluation score
+P9037	Has experimental datasets
+P9038	has evaluation score
+P9039	Notes
+P9043	R0 estimates (average)
+P9044	95% Confidence interval
+P9045	R0 estimates (average)
+P9046	R0 estimates (average)
+P9047	R0 estimates (average)
+P9048	R0 estimates (average)
+P9049	R0 estimates (average)
+P9050	R0 estimates (average)
+P9051	R0 estimates (average)
+P9052	R0 estimates (average)
+P9053	R0 estimates (average)
+P9054	R0 estimates (average)
+P9055	R0 estimates (average)
+P9056	R0 estimates (average)
+P9062	has symptom
+P9063	receives therapy
+P9064	has drug
+P9065	has technique
+P9066	RNeasy Plus Universal Mini kit
+P9067	Qiagen
+P9068	has body temperature
+P9069	has date
+P9070	has instrument
+P15014	Used prototypes for early feedback
+P15015	Tested usability or user eTperience
+P15016	Tested driving performance
+P15017	Implemented as display mock-up
+P9071	Material
+P9072	Data
+P34000	Relevant data
+P33129	R60168
+P33130	R60170
+P33075	R59833
+P33076	R59835
+P33077	R59837
+P33041	R58162
+P33042	R58164
+P33043	R58166
+P33044	R58168
+P33045	R58170
+P33046	R58172
+P33047	R58174
+P33048	R58176
+P33049	R58178
+P33050	R58180
+P34103	Has benchmark
+P34100	on research field
+P34101	analysis aspect
+P33028	has_doi
+P33029	has_venue
+P33031	HAS_RESULTS
+P33032	HAS_RESULTS
+P33033	HAS_RESULTS
+P33034	HAS_RESULTS
+P33035	HAS_RESULTS
+P33036	Sub-hypothesis
+P33037	Which species are compared?
+P33038	Indicator for enemy release
+P33039	Release of which kind of enemies?
+P34104	Has lower limit for 95% onfidence interval
+P34105	Has lower limit for 95% onfidence interval
+P34106	Has lower limit for 95% onfidence interval
+P34116	AUROC
+P34117	AUCPR
+P33014	Measure of native biodiversity
+P34102	Has Kaggle Competition
+P33012	Transition in the invasion process
+P33013	Observed proportion of species making the transition
+hasVisualization	Has visualization
+P33000	"Format"
+P33001	Format
+P34107	Has upper limit for 95% onfidence interval
+P34109	Has lower limit for 95% confidence interval
+P33004	References
+P33005	P32
+P33006	Measure of resistance/susceptibility
+P33007	P32
+P33008	Type of interaction
+P33009	Type of effect description
+P33010	Ecological Level of evidence
+P33011	Outcome of interaction
+P32124	Has ECS result
+P34099	Has information processing paradigm
+P33002	Features/improvement
+P33003	Total Metadata entries
+P34098	about species
+P15007	Conducted by
+P15008	Criteria defined by
+P15009	Intended audience
+P15010	Intended use
+P20071	Introduce
+P20072	model
+P34123	R^2
+P20073	is
+P20074	use
+P20075	mask
+P20076	replacing
+P20077	replacement
+P20078	involves
+P20079	remove
+P20080	sample
+P20081	evaluate-on
+P20082	follow
+P20083	consists
+P20084	Two sentence-level classification tasks
+P32109	Phenotypic plasticity form
+P32110	Phenotypic plasticity form
+P32111	Phenotypic plasticity form
+P32112	Phenotypic plasticity form
+P32113	Phenotypic plasticity form
+P32114	Phenotypic plasticity form
+P32115	Phenotypic plasticity form
+P32116	Phenotypic plasticity form
+P32119	Direct anthropogenic dist.?
+P32064	Phenotypic plasticity form
+P32065	Phenotypic plasticity form
+P32066	Phenotypic plasticity form
+P32067	Phenotypic plasticity form
+P32068	Phenotypic plasticity form
+P32069	Phenotypic plasticity form
+P32070	Phenotypic plasticity form
+P32071	Phenotypic plasticity form
+P32072	Phenotypic plasticity form
+P32073	Phenotypic plasticity form
+P32074	Phenotypic plasticity form
+P32075	Phenotypic plasticity form
+P32076	Phenotypic plasticity form
+P32077	Phenotypic plasticity form
+P32078	Phenotypic plasticity form
+P32079	Phenotypic plasticity form
+P32080	Phenotypic plasticity form
+P32081	Phenotypic plasticity form
+P32082	Phenotypic plasticity form
+P32083	Phenotypic plasticity form
+P32084	Phenotypic plasticity form
+P32085	Phenotypic plasticity form
+P32086	Phenotypic plasticity form
+P32087	Phenotypic plasticity form
+P32088	Phenotypic plasticity form
+P32089	Phenotypic plasticity form
+P32090	Phenotypic plasticity form
+P32091	Phenotypic plasticity form
+P32092	Phenotypic plasticity form
+P32093	Phenotypic plasticity form
+P32094	Phenotypic plasticity form
+P32095	Phenotypic plasticity form
+P32096	Phenotypic plasticity form
+P32097	Phenotypic plasticity form
+P32098	Phenotypic plasticity form
+P32099	Phenotypic plasticity form
+P32100	Phenotypic plasticity form
+P32101	Phenotypic plasticity form
+P32102	Phenotypic plasticity form
+P32103	Phenotypic plasticity form
+P32104	Phenotypic plasticity form
+P32105	Phenotypic plasticity form
+P32106	Phenotypic plasticity form
+P32107	Phenotypic plasticity form
+P32108	Phenotypic plasticity form
+P32019	Phenotypic plasticity form
+P32020	Phenotypic plasticity form
+P32021	Phenotypic plasticity form
+P32022	Phenotypic plasticity form
+P32023	Phenotypic plasticity form
+P32024	Phenotypic plasticity form
+P32025	Phenotypic plasticity form
+P32026	Phenotypic plasticity form
+P32027	Phenotypic plasticity form
+P32028	Phenotypic plasticity form
+P32029	Phenotypic plasticity form
+P32030	Phenotypic plasticity form
+P32031	Phenotypic plasticity form
+P32032	Phenotypic plasticity form
+P32033	Phenotypic plasticity form
+P32034	Phenotypic plasticity form
+P32035	Phenotypic plasticity form
+P32036	Phenotypic plasticity form
+P32037	Phenotypic plasticity form
+P32038	Phenotypic plasticity form
+P32039	Phenotypic plasticity form
+P32040	Phenotypic plasticity form
+P32041	Phenotypic plasticity form
+P32042	Phenotypic plasticity form
+P32043	Phenotypic plasticity form
+P32044	Phenotypic plasticity form
+P32045	Phenotypic plasticity form
+P32046	Phenotypic plasticity form
+P32047	Phenotypic plasticity form
+P32048	Phenotypic plasticity form
+P32054	Phenotypic plasticity form
+P32061	Phenotypic plasticity form
+P32049	Phenotypic plasticity form
+P32050	Phenotypic plasticity form
+P32051	Phenotypic plasticity form
+P32052	Phenotypic plasticity form
+P32053	Phenotypic plasticity form
+P32055	Phenotypic plasticity form
+P32056	Phenotypic plasticity form
+P32057	Phenotypic plasticity form
+P32058	Phenotypic plasticity form
+P32059	Phenotypic plasticity form
+P32060	Phenotypic plasticity form
+P32062	Phenotypic plasticity form
+P32063	Phenotypic plasticity form
+P34118	PPV
+P34120	Goodness of fit: Loss
+P34121	Chi-Square
+P34122	NDCG
+P32000	Phenotypic plasticity form
+P32001	Specific traits
+P32002	Species name
+P32003	Phenotypic plasticity form
+P32004	Phenotypic plasticity form
+P32005	Phenotypic plasticity form
+P32006	Phenotypic plasticity form
+P32007	Phenotypic plasticity form
+P32008	Phenotypic plasticity form
+P32009	Phenotypic plasticity form
+P32010	Phenotypic plasticity form
+P32011	Phenotypic plasticity form
+P32012	Phenotypic plasticity form
+P32013	Phenotypic plasticity form
+P32014	Phenotypic plasticity form
+P32015	Phenotypic plasticity form
+P32016	Phenotypic plasticity form
+P32017	Phenotypic plasticity form
+P32018	Phenotypic plasticity form
+P31017	Non-plant species
+P31018	Non-plant species
+P31019	Non-plant species
+P31020	Non-plant species
+P31021	Non-plant species
+P31022	Non-plant species
+P31023	Investigated species
+P31024	Number of species
+P34113	Performance:Specificity
+P34114	Performance:NPV
+P31007	Non-plant species
+P31008	Non-plant species
+P31009	Non-plant species
+P31010	Non-plant species
+P31011	Non-plant species
+P31012	Non-plant species
+P31013	Non-plant species
+P31014	Non-plant species
+P31015	Non-plant species
+P31016	Non-plant species
+P30006	Has participating device
+P30007	Has participating person
+P30008	Has gaseous sample input
+P30009	Has solution sample input
+P30010	Has solid sample input
+P30011	Has radiant energy input
+P30012	Has output
+P30013	Has component type
+P30014	Has specified volume
+P30015	Has specified mass
+P30016	pH
+P30019	Wavelength of maximum absorption
+P30020	Duration of absorption process
+P30021	Half time for charge recombination (t1/2)
+P30023	Related Comparisons
+P33141	R63786
+P33142	R63788
+P30024	has params
+P30025	uses pipeline
+P31000	appraoch
+P34057	Konzepte der Jugendarbeit
+P34060	Number of concepts
+P34061	Text coverage
+P34058	Doppeltes Mandat der Jugendarbeit
+P34108	Material
+P29012	Measure of invasion success
+P29010	stand
+P33025	has_method
+P33026	has_value
+P33027	has_venue
+P33022	The size of data that is being considered for processing is probably the most important factor. If the data can fit into the system memory, then clusters are usually not required and the entire data can be processed on a single machine. The platforms such as GPU, Multicore CPUs etc. can be used to speed up the data processing in this case. If the data does not fit into the system memory, then one has to look at other cluster options such as Hadoop, Spark etc. Again, Hadoop and Spark clusters can handle large amount of data but Hadoop has well developed tools and frameworks although it is slower for iterative tasks. The user has to decide if he needs to use off-the-shelf tools which are available for Hadoop or if he wants to optimize the cluster performance in which case Spark is more appropriate
+P33023	testun
+P33024	Relevance
+P33063	R59759
+P33064	R59761
+P33065	R59763
+P33066	R59765
+P33155	Data size supported
+P29015	deleted
+P29016	R51465
+P29017	R51467
+P29018	R51469
+P29019	R51471
+P29020	R51473
+P29021	R51475
+P29022	R51477
+P29023	R51479
+P29024	R51481
+P33040	paper:DOI
+P29034	R51509
+P29035	R51511
+P29036	R51513
+P29037	R51515
+P29026	R51491
+P29027	R51493
+P29028	R51495
+P29029	R51497
+P29030	R51499
+P29031	R51501
+P29032	R51503
+P29033	R51505
+P29038	R51517
+P29039	R51519
+P29040	R51521
+P29041	R51523
+P29042	R51527
+P29043	R51529
+P29044	R51531
+P29045	R51533
+P29046	R51535
+P29047	R51537
+P29048	R51539
+P29049	R51541
+P30005	Produced by
+P33015	New data sources
+P33017	Data Access
+P34014	has_host
+P34017	state of host plant tissue at moment of consumption
+contains	contains
+P15000	has patient
+P15001	related to
+P18091	Compares
+P15002	has GenBank accession number
+P15013	Implemented into car mock-up
+P15035	Ontologies
+P15036	Inputs/Outputs
+P15037	Pre/Post-conditions
+P15038	Protocols
+P15039	QoS
+P15040	Specification Languages
+P15041	Matching Result Degrees
+P15042	Incomplete Knowledge
+P15043	Variational Scope
+P15044	Heuristics & Simplif.
+P15045	Calculation Concepts
+P15046	Nature of Traceability
+P15047	Automation
+P15048	Tool-Support
+P15049	Year ofDevelopment
+P15050	Area of use
+P15051	Objective
+P15052	Accuracy/Results
+P15053	Future work/challenges
+P15054	Artefacts
+P15055	Mechanisms providing feedback
+P15056	Information sources
+P15057	Benefits
+P15058	Types of feedback
+P15059	Category
+P15060	Highlights
+P15061	Technology Bases
+P15062	Game Genres
+P15063	Major Contributions
+P15296	Has vocabulary
+P15297	Gramatically augmented ontology The results were quite promising, as the ontology contributed to improvements in the analysis of signs and in the generation of Ukrainian natural language
+P15064	esearchMethod
+P15065	AgileMethod
+P15066	Focus
+P15067	Publication type
+P15068	Research Method
+P15069	# of Subjects
+P15070	Studied Picking System
+P15071	System
+P15072	Year
+P15073	Vis. Types
+P15074	Recomm.
+P15075	Incr.
+P15076	App. Type
+P15077	File Size
+P15078	Avg. size of transactions
+P15079	Avg. size of itemsets
+P15080	Threshold
+P15081	Time(sec)
+P15082	Memory Usage
+P15083	catalysts
+P15084	feedgas composition
+P15085	T (°C)
+P15086	P (MPa)
+P15087	conv (%)
+P15088	selectivity (%)
+P15089	SV (ml·g −1·h−1cat)
+P15090	substrate
+P15091	catalyst
+P15092	Analyte
+P15093	Application
+P15094	Sensitivitya
+P15095	Detection limit
+P15096	Experimental Dataset
+P15097	Groundtruth Speci cation
+P15098	Performance Results
+P15099	Error Analysis
+P15100	Comparative Evaluation
+P15101	Key Idea
+P15102	Physical Layout Representation
+P15103	Logical Structure Representation
+P15104	Output Representation
+P15105	Logical Labels
+P15106	Application Domain
+P15107	Material linearity - Adhesive - Linear
+P15108	Material linearity - Adhesive - Nonlinear
+P15109	Material linearity - Adherend - Linear
+P15110	Material linearity - Adherend - nonlinear
+P15111	Adherends - Isotropic
+P15112	Adherends - Composite
+P15113	Adherends - Similar
+P15114	Adherends - Dissimilar - Thickness
+P15115	Adherends - Dissimilar -Material
+P15116	Adhesive stresses - sx
+P15117	Adhesive stresses - sy
+P15118	Adhesive stresses - txy
+P15119	Solution - Closed-form
+P15120	Solution - Numerical
+P15121	Place of experiment
+P15122	Population
+P15123	Procedure
+P15124	Data analysis
+P15125	Concluding remarks
+P15126	Comments
+P15127	Governmnt regulation
+P15128	Illegal activities
+P15129	National statistics (GNP)
+P15130	Labor market or status of labor (unregul., no soc. benef., work condit., etc.)
+P15131	Tax evas. or unreport. income
+P15132	Activity’s size (small scale of operat.)
+P15133	Professional status (self-empl. Or family-based)
+P15134	Activity’s regulation or registration
+P15135	Networks
+P15136	Autonomy and flexibility
+P15137	Survival
+P15138	Political (legal aspects) Governmnt regulation
+P15139	Criteria Economic Activity’s size (small scale of operat.)
+P15140	Social Autonomy and flexibility
+P15141	Demand
+P15142	Topology
+P15143	outing
+P15144	Inventory
+P15145	Fleet composition
+P15146	Fleet size
+P15147	Inventory fleet
+P15148	Composition
+P15149	Products
+P15150	Routing aspects
+P15151	Inventory management aspects
+P15152	Sources
+P15153	Chitosanase family
+P15154	Applications
+P15155	Protocol
+P15156	Innovation
+P15157	Cluster count
+P15158	Inter-cluster topology
+P15159	CH election
+P15160	Mobility
+P15161	Location awareness
+P15162	Load balancing
+P15163	Node type
+P15164	Nature
+P15165	Cluster Properties Cluster size
+P15166	Intra com.
+P15167	Inter com.
+P15168	CH Properties Mobility
+P15169	ole
+P15170	Objectives
+P15171	Clustering Process CH Election
+P15172	Alg. Complexity
+P15173	Dynamism
+P15174	CH Properties Mobility Node type
+P15175	Column
+P15176	Industry
+P15177	Technical infrastructure
+P15178	System integration
+P15179	Data processing
+P15180	Activation method
+P15181	Group that reacts (withactivated matrix)
+P15182	Polymer
+P15183	Grouphat reacts
+P15184	eagent
+P15185	Activated groupproduced
+P15186	Group that reacts(with activatedmatrix)
+P15187	Sample Period
+P15188	Nominal or real exchange rate used
+P15189	Countries and Estimation technique used
+P15190	Main Result
+P15191	Name
+P15192	System model
+P15193	Control model
+P15194	Fault tolerance
+P15195	Simulator
+P15196	Linux
+P15197	Windows
+P15198	Standards and technologies used
+P15199	Open source
+P15200	Behavior coordination
+P15201	Real time
+P15202	Distributed environment
+P15203	Dynamic wiring
+P15204	Security
+P15205	Elements
+P15206	Authors
+P15207	Date
+P15208	Steel Grade
+P15209	Special Notes
+P15210	Configuration of system
+P15211	Control approach
+P15212	Operating conditions
+P15213	Undershoot [pu] 1 Δf1
+P15214	Undershoot [pu] 2 Δf2
+P15215	Column2 ΔPtie
+P15216	Settling time (s) 1 Δf1
+P15217	Settling time (s) 2 Δf2
+P15218	Column3 ΔPtie
+P15219	Controller design
+P15220	Control structure
+P15221	│ACE1│ Avg [pu]
+P15222	│ACE2│ Avg [pu]
+P15223	│ACE3│ Avg [pu]
+P15224	Undershoot [pu] Δf
+P15225	Δf2
+P15226	Δf3
+P15227	Undershoot [pu] 3 ΔPtie
+P15228	Settling time (s) 3 ΔPtie
+P15229	Correlation
+P15230	Performance indicator (in per-capita terms if not otherwise indicated)
+P15231	Aggregation level
+P15232	Time perspective (CS = cross-section, L = longitudinal)
+P15233	Age indicators
+P15234	Age–performance patternc,d OLS / ordinary least square regression
+P15235	FE / controlled for omitted variables by inclusion of fixed effects
+P15236	IV / instrumental variable approach
+P15237	Countries
+P15238	Period
+P15239	Methodology
+P15240	Conclusion (s) EC-Y (from energy consumption to economic growth )
+P15241	Y-EC (from ecnomic grwth to energy consumption )
+P15242	Y2EC (feedback hypothesis )
+P15243	YaEC neutral hypothesis between energy consumption and economic growth )
+P15244	Conclusion (s) ELC-Y (electricty consumption to economic growth )
+P15245	Y-ELC (from ecnomic grwth to electricty consumption )
+P15246	Y2E (feedback hypothesis )
+P15247	YaELC (neutral hypothesis between electricty consumption and economic growth)
+P15248	No.
+P15249	Country
+P15250	Conclusion (s) NE-Y(nuclear energy consumption to economic growth )
+P15251	Y-NE (from ecnomic grwth to nuclear energy consumption )
+P15252	Y2NE (feedback hypothesis )
+P15253	YaNE (neutral hypothesis between nuclear energy consumption and economic growth )
+P15254	Conclusion (s) NE-Y (from nuclear energy consumption to economic growth)
+P15255	Educational context
+P15256	Evaluator
+P15257	Result
+P15258	Topic
+P15259	Taxonomy stage: Step
+P15260	Computational platform
+P15261	Age (years)
+P15262	Sex
+P15263	Chief Clinical presentation
+P15264	Size (mm)
+P15265	Follow up (months)
+P15266	Container flow
+P15267	oute
+P15268	Market
+P15269	emarkable factor
+P15270	Inventory policy
+P15271	Main question
+P15272	Testing profile
+P15273	Measurements
+P15274	Cooling
+P15275	Temperature swing and Tm ax
+P15276	Failures and indicators
+P15277	Failure mechanism
+P15278	Circuit
+P15279	Age
+P15280	Site
+P15281	Size (cm)
+P15282	Weight (g)
+P15283	Symptoms and signs
+P15284	Laboratory fi ndings
+P15285	Surgery
+P15286	RT/Neoadjuvant or adjuvant CT
+P15287	Recurrence
+P15288	Treatment of recurrence
+P15289	Follow-up
+P15295	Has resource
+P15290	Number of Objectives
+P15291	Algorithm(s)
+P15292	Tool
+P15293	Quality Indicators
+P15294	Has ressource
+P15298	Tools
+P15299	Some of the simulation model characteristics
+P15300	Performance measures
+P15301	Author’s conclusions
+P15302	AMHS configuration
+P15303	Strategy
+P15304	Objective function(s)
+P15305	Application area studied
+P15306	Type of question asked
+P15307	esearch method & question set
+P15308	Subjects
+P15366	Confidentiality (Privacy) Technique
+P27054	Institutioans
+P27055	Publications
+P15309	# convolutional layer
+P15310	# fully connected layer, # features
+P15311	3D model
+P15312	Cascaded method
+P15313	Databases
+P15314	Video (v)/image (i)
+P15315	Gray (g)/color (c)
+P15316	Amount of data
+P15317	Variations
+P15318	Number of landmark points
+P15319	# points
+P15320	fps
+P22058	start period(gg/mm/aaaa)
+P22059	end period(gg/mm/aaaa)
+P15321	Detection (d) or tracking (t)
+P15322	Realtime (y) or not (n)
+P15323	Source code (sc) or binary code (bc)
+P15324	Number of points
+P15325	Links
+P15326	Normalized error
+P15327	Coverage
+P15328	Country zone
+P15329	Types of literature reviews
+P15330	Paper
+P15331	Journals/ (papers)
+P15332	Events/ (papers)
+P15333	Other sources/ (papers)
+P15334	Foci
+P15335	Factor
+P15336	Papers
+P15337	Publication type Period
+P15338	Papers Foci
+P15339	Types of literature Publication reviews type
+P15340	Context
+P15341	Power of income
+P15342	Type of data
+P15343	Shape of EKC
+P15344	EKC Turnaround point(s)
+P15345	EKC Turnaround point(s) 2
+P15346	Tailoring feedback
+P15347	inter- human interaction
+P15348	user targeting
+P15349	adaptation
+P15350	goal setting
+P15351	context awareness
+P15352	self learning
+P15353	Building
+P15354	Building Methodology
+P15355	Key findings
+P15356	Sr. No
+P15357	Techniques
+P15358	Developer
+P15359	Advantage
+P15360	Disadvantage
+P15361	Authenticity Technique
+P15362	Sybil Attacks
+P15363	Node Imper’
+P15364	Sending False Info’
+P15365	ID Disc’
+P15367	Non-repudiation Technique
+P15368	Availability Technique
+P15369	Integrity Technique
+P15370	Challenges
+P15371	#Test
+P15372	Accuracy (%) deyeo0:
+P15373	deyeo0:
+P15374	Time (s)
+P15375	n
+P15376	Aim of the study
+P15377	Study population
+P15378	eferred index
+P15379	efered index
+P15380	Disaster phase Pre-disaster
+P15381	Post-disaster
+P15382	Application case Earthquake
+P15383	Hurricane
+P15384	Flood
+P15385	Objectives First-stage
+P15386	Second-stage
+P15387	Decisions First-stage
+P15388	Second-stage2
+P15389	Uncertainty on the first-stage
+P15390	Special features
+P15391	Problematic assumptions
+P15392	Uncertainty in the first-stage
+P15393	Features
+P15394	Problematic assumption
+P15395	Solution method
+P15396	Solution Exact
+P15397	Non-exact
+P15398	Problem-tailored heuristic
+P15399	Metaheuristic
+P15400	Matheuristic
+P15401	Motivation
+P15402	Spatial structure/population heterogeneity
+P15403	Population structure
+P15404	Population size
+P15405	Recombination Within island
+P15406	Migration
+P15407	Aging
+P15408	Self-adaptation
+P15409	Important implementation parameters / factors
+P15410	Other facts
+P15411	Definition
+P15412	Middle-income range: thresholds
+P15413	Database
+P15414	Time period
+P15415	Number of MIT countries
+P15416	egions most affected by the MIT
+P15417	Method/Technique(s)/ Database
+P15418	Result/ Accuracy
+P15419	Conclusion
+P15420	Future scope
+P15421	Types
+P15422	Objective/estimate(s) process systems
+P15423	Systems applied
+P15424	Positive highlights
+P15425	Ranker
+P15426	Computational complexity
+P15427	Density
+P15428	Diversity
+P15429	Close to boundary
+P15430	Far from boundary
+P15431	Probabilistic/ uncertainty of ranker
+P15432	Myopic
+P15433	Quality attribute
+P15434	Abs. Factory
+P15435	Builder
+P15436	Factory Method
+P15437	Prototype
+P15438	Singleton
+P15439	Adapter
+P15440	Bridge
+P15441	Composite
+P15442	Decorator
+P15443	Facade
+P15444	Flyweight
+P15445	Proxy
+P15446	Chain of Resp.
+P15447	Command
+P15448	Interpreter
+P15449	Iterator
+P15450	Mediator
+P15451	Memento
+P15452	Observer
+P15453	State
+P15454	Template
+P15455	Visitor
+P15456	Samples
+P15457	No. of samples
+P15458	C. jejuni (%)
+P15459	C. coli (%)
+P15460	Others (%)
+P15461	Sp
+P15462	Comparison
+P15463	HPLC global
+P15464	CHG
+P15465	CG
+P15466	Global
+P15467	Others
+P15468	Gasifiers
+P15469	Cost
+P15470	Reported capacity(MWth)
+P15471	Year data
+P15472	Cost V2012 (400 MWth)
+P15473	Scale factor
+P15474	Reported cost
+P15475	Reported capacity (bbl/d)
+P15476	Reported capacity (MWth fuel)
+P15477	Cost V2012 (150 MW unit)
+P15478	Plant type
+P15479	ISBL cost (MV)
+P15480	Total capital investment (MV)
+P15481	Published cost (V/GJ LHV)
+P15482	Updated cost (V 2012/ GJ LHV)
+P15483	Capacity (MWth)
+P15484	Plant cost (MV)
+P15485	Plant cost (MV 2012)
+P15486	Plant cost (400 MW MV 2012)
+P15487	Diesel (V/l
+P15488	Diesel 400 MW (V2012/l)
+P15489	Plant cost (M$)
+P15490	Plant cost (M$ 2012)
+P15491	Plant cost (1000 t/h MV 2012)
+P15492	BEOP ($/barrel)
+P15493	BEOP (V2012/barrel averaged coal price)
+P15494	Diesel (V2012/l)
+P15495	Supervised / unsupervised
+P15496	Dependency on the underlying models
+P15497	Assumption of data availability
+P15498	Computational cost
+P15499	Criterion A
+P15500	Resources and their constraints
+P15501	job complexity and routing flexibility
+P15502	Sequencing
+P15503	Mono/multi
+P15504	Pure/hybrid
+P15505	Country / Plant part CS
+P15506	Collection site
+P15507	Plant material status
+P15508	Isolation Procedure
+P15509	Oil yield
+P15510	Main components (P5%)
+P15511	Measurement type
+P15512	Country of study
+P15513	Data and sample size
+P15514	Population under analysis
+P15515	Data collec- tion
+P15516	Over-educa- tion incidence (percentages)
+P15517	Satellite sensor
+P15518	Band
+P15519	Image resolution [m] PAN MS
+P15520	Min. size [m]
+P15521	Methods of vessel candidate detection
+P15522	Methods of discrimination/ classification
+P15523	Eval. of results
+P15524	Main purpose
+P15525	No
+P15526	political incentives (POLIN) - political competition
+P15527	political incentives (POLIN) voter participation
+P15528	political incentives (POLIN) - legislative power
+P15529	political incentives (POLIN) - interest group competition
+P15530	political incentives (POLIN) - government size
+P15531	social incentives (SOCIN) - public media
+P15532	social incentives (SOCIN) - interparty competition
+P15533	social incentives (SOCIN) - activity
+P15534	social incentives (SOCIN) - voter wealth
+P15535	social incentives (SOCIN) - regional culture
+P15536	social incentives (SOCIN) - internet access
+P15537	social incentives (SOCIN) - voter demographic
+P15538	financial incentives (FININ) - reliance on debt
+P15539	financial incentives (FININ) - government wealth
+P15540	financial incentives (FININ) - reliance on federal
+P15541	institutional incentives (INSIN) - professionalism
+P15542	institutional incentives (INSIN) - population size
+P15543	institutional incentives (INSIN) - staff demographic
+P15544	institutional incentives (INSIN) - government type
+P15545	institutional incentives (INSIN) - staff selection
+P15546	institutional incentives (INSIN) - IT sophistication
+P15547	governance incentives (GOVIN) - governance power
+P15548	governance incentives (GOVIN) - accounting quality
+P15549	governance incentives (GOVIN) - system endorsement
+P15550	governance incentives (GOVIN) - audit quality
+P15551	governance incentives (GOVIN) - code of ethics
+P15552	governance incentives (GOVIN) - disclosure regulation
+P15553	Variables
+P15554	Gender (men/women)
+P15555	Mean age (years)
+P15556	Pathology/diagnosis
+P15557	Corticosteroit treatment - Corticosteroid (n)
+P15558	Corticosteroit treatment - Noncorticosteroid (n)
+P15559	Anastomotic leakage (AL) - Total AL (n)
+P15560	Anastomotic leakage (AL) - corticosteroid (n)
+P15561	Anastomotic leakage (AL) - noncorticosteroid (n)
+P15562	Statistical analysis OR
+P15563	95% CI
+P15564	Type of anastomosis - Ileoileal
+P15565	Type of anastomosis -Ileocolic
+P15566	Type of anastomosis - Ileorectal
+P15567	Type of anastomosis - Colorectal
+P15568	Type of anastomosis - Colocolic
+P15569	Type of anastomosis - Ileal pouch
+P15570	Type of anastomosis - anal (IPAA)
+P15571	Type of anastomosis -Handsewn
+P15572	Type of anastomosis - Stapled
+P15573	Surgery - Elective
+P15574	Surgery - Emergency
+P15575	Surgery - Right-sided colectomy
+P15576	Surgery - Left-sided colectomy
+P15577	Surgery - Anterior resection
+P15578	Surgery - Colectomy
+P15579	Surgery - Segmental
+P15580	Product
+P15581	Compound
+P15582	Indication
+P15583	Conc. (%)
+P15584	Disease
+P15585	Number of patients studied
+P15586	N (%) with abnormal karyotype
+P15587	N (% abnormal) with abnormal chromosome
+P15588	N (% abnormal) with abnormal chromosome 1
+P15589	N (%) with 2 isolated abnormalities
+P15590	Type of abnormalities
+P15591	SCM field
+P15592	Critical success factors
+P15593	Chronologic age in months
+P15594	Duration of the study in years
+P15595	Cognitive tests Findings
+P15596	Number of examinees
+P15597	Chronologic age in months at the beginning of the study
+P15598	Cognitive tests
+P15599	Findings
+P15600	The number of examinees
+P15601	ADALINE/ Widrow- Hoff
+P15602	Backpropagation
+P15603	Perceptron
+P15604	Radial Basis Function
+P15605	Hopfield
+P15606	Platform
+P15607	Vendor
+P15608	Comment
+P15609	Fields
+P15610	Artifacts
+P15611	Invisibility
+P15612	PayloadCapacity
+P15613	Robustness againststatistical attacks
+P15614	Tolerance to RSSteganalysis
+P15615	Robustness againstimagemanipulation
+P15616	LSBreplacementstyleasymmetry
+P15617	Utilization of edgeareas
+P15618	Species Order
+P15619	Seawater
+P15620	Analytical method
+P15621	Freshwater
+P15622	Brackish water
+P15623	Follow-up time/ total observation time after MON n M/F
+P15624	Patients
+P15625	MS development
+P15626	% who develop MS from MON (%)
+P15627	Diagnostic criteria for MS (CDMS)
+P15628	Method to detect OCBs
+P15629	Odds ratio (95% CI)
+P15630	Sensitivity (95% CI)
+P15631	Specificity (95% CI)
+P15632	[7]Region
+P15633	Farmers
+P15634	Total Social Welfare (million US dollar per year)
+P15635	Social Welfare per adopted hectare (US dollars per hectare) []
+P15636	Million adopted hectares (yearly averages) [adoption rate%]
+P15637	Technology sellers
+P15638	Consumer Welfare
+P15639	Feasibility
+P15640	Justification/ recommendation
+P15641	inflammatory bowel disease
+P15642	Intestinal operation
+P15643	Recent in- hospital treatment/ operation
+P15644	Recent antibiotic therapy
+P15645	intermediate care unit/ Sepsis
+P15646	Surgical procedure
+P15647	Endoscopy
+P15648	Treatment
+P15649	Deceased
+P15650	Max. reduction
+P15651	Speed of no reduction
+P15652	Distance to microphone, m
+P15653	Method/ Technique(s)/(Database)
+P15654	Result/Accuracy
+P15655	Future work
+P15656	Activity
+P15657	Functional Data specification
+P15658	Variables (1)
+P15659	Economies of Scale
+P15660	Other Measurements
+P15661	Functional specification
+P15662	Scale economies evaluated  in the approximation point
+P15663	Disclosures
+P15664	Anonymistion approaches
+P15665	Background information
+P15666	Anonymistion algorithm/method
+P15667	Definition of completeness
+P15668	Measure of completeness
+P15669	Data extraction tools
+P15670	Reminder systems
+P15671	Data repositories
+P15672	For a single source only once
+P15673	With a gold standard
+P15674	Comparison between different tools, information systems or data task
+P15675	Comparison among healthcare institutions
+P15676	Before and after data quality intervention
+P15677	During time intervals
+P15678	Determinants
+P15679	Name of Scheme
+P15680	Parameters
+P15681	Enviroment
+P15682	Tools used for simulation
+P15683	Tool Findings
+P15684	First author
+P15685	Type of test
+P15686	Prevalence, %
+P15687	Sample size (n)
+P15688	Screening
+P15689	Calculation of sample size
+P15690	Species (developmental mode)
+P15691	Body mass (g)
+P15692	Egg mass (g)
+P15693	Embryo assessment , presence only only
+P15694	Embryo assessment, developmental stage stage
+P15695	Incubation state/egg characteristic
+P15696	Difference (% decrease) in shell thickness (egg region) in shell thickness (egg region)
+P15697	test collection
+P29011	Measure of species similarity
+P15698	has location
+P24002	Scalability
+P30022	Time duration
+P15700	has end
+P18092	paper:published_in
+P18093	study_date
+P18094	reported_cases
+P27051	Patents
+P27052	Persons
+P15701	upper limit
+P15702	lower limit
+P15699	has beginning
+P18086	Cohesive energy density
+P19000	Lower confidence limit
+P27031	Estimated value
+InstanceOfTemplate	Instance Of Template
+RelatedResource	Related Resource
+P27043	RDF dump
+P16000	has annotated data
+P16001	type 1
+P16002	Type2
+P16003	Type1
+P16004	Type1
+P28001	problem statement
+P16005	Relation1
+P16006	Relation2
+P16007	Usage
+P16008	Feature-Of
+P16009	Conjunction
+P16010	Part-Of
+P29009	has mode of action
+P16011	Hyponym-Of
+P16012	Compare
+P16013	Overall
+P16014	Method automation
+P16015	Supports reference extraction
+P16016	Knowledge graph creation
+P16017	Input format
+P16018	Output format
+P16019	User interface
+P16020	Summary
+P23031	has software
+P23032	has amino acid change
+P18078	For task
+P16021	has URI
+P16022	R0 estimates (average)
+P16023	mean time interval between onset and hospital quarantine
+P16024	mean incubation period
+P16025	mean serial interval
+P16026	study period name
+P16030	common symptoms
+P27058	Radiant energy
+P16027	data collection tool
+P16028	measurement condition 1
+P16029	measurement condition 2
+P29025	has roles
+P20052	has sequencing method
+P16031	mean of serial interval
+P16032	standard deviation of serial interval
+P16033	code
+P16034	incubation SD
+P16035	incubation period mean
+P16036	scenario
+P16037	dataset description
+P17000	R0 estimated duration
+P17001	data source
+P17002	scenario 1
+P17003	scenario 2
+P17004	Rc estimates (average)
+P17005	dataset alias name
+P17006	dataset revision
+P17007	method description
+P20155	Related Figure
+order	order
+P23007	Examples
+P23009	Supports
+P23010	nari
+P23011	tudy dat
+P23012	Total (Symptomatic cases-67% of all infected cases)
+P23013	Proportion of population (Symptomatic cases-67% of all infected cases)
+P23014	Peak week for incidence (Symptomatic cases-67% of all infected cases)
+P23015	Peak month for incidence (Symptomatic cases-67% of all infected cases)
+P23016	Number of sick people on the worst day of the simulated year (Symptomatic cases-67% of all infected cases)
+P23107	Infectious agent population
+P23108	Basic reproducion number
+P23109	Study design
+P23110	Blinding of outcome assessment
+P23111	Randomization
+P23112	allocation concealment
+P23113	Incomplete outcome   data
+P23114	Selective reporting
+P23115	other sources of bias
+P23116	Disease definitions (characterization)
+P23117	Study groups
+P18003	hasInteractionwithMasterData
+P18004	hasStakeholders
+P18000	hasMasterDataRepresentation
+P18001	hasMappingtoSource
+P18002	hasDocumentation
+P27060	ID
+P18005	hasRepresentationMasterData
+P24006	Data Size Support
+P18006	Method
+P18007	Data
+P18008	Has demo
+P18009	has learning rate
+P18010	has dropout
+P18011	has hyperparameters
+P18012	has activation function
+P18013	has training epochs
+P18014	has early stopping
+P18015	has optimization
+P18017	has comparisons
+P18018	outperforms
+P18016	has scaling parameter
+P18019	Test
+P18020	has test
+P27039	Material
+P27040	Data
+P27041	Method
+P27042	Process
+P18088	has can communicate with
+P18089	has Autonomy
+P18090	Has way action performed on environment
+P18030	construct
+P18031	assign
+P18032	update parameters
+P23006	has countries
+P24010	Uses metric
+P24014	requirements
+P18021	Training data
+P18022	has
+P18023	consists of
+P18024	handles
+P18025	represent
+P18026	employ
+P18027	Detects
+P18028	treat
+P18029	perform
+P18033	Try
+P18035	on task
+P18036	On evaluation dataset
+P18037	F1
+P18034	evaluation 1
+P18038	has Task
+P18039	use
+P18040	represented by
+P18041	contains
+P18042	adopt
+P18043	inputs of decoding layer
+P18044	Has word embedding
+P18045	Has lstm units in encoding layer
+P18046	has lstm units in decoding layer
+P18047	Has bias parameter alpha
+P18048	Accuracy
+P18049	Bleu Score
+P23067	mixture of
+P23068	to
+P23069	takes into account
+P23070	optimize
+P23071	higher NER and RC scores
+P23072	than
+P23073	higher EC and RC scores
+P23074	on
+P23075	provide
+P23076	train
+P23077	find
+P23078	slightly better
+P20051	has sequencing type
+P18050	PubChem AID
+P18051	Protein Target
+P18052	status
+P18053	Modiy Date
+P18054	Deposit Date
+P18055	has
+P18056	has confirmatory assay
+P18057	has assay format
+P18058	Has participant
+P18059	has role
+P18060	is bioassay type of
+P18061	has assay method
+P18062	has detection method
+P18063	has assay title
+P18064	has temperature value
+P18065	has incubation time value
+P18066	has assay phase characteristic
+P18067	has measured entity
+P18068	has endpoint
+P18069	has concentration unit
+P18070	Has detection instrument
+P32120	Data calculated with model
+P32121	Global and annual mean surface air temperature
+P27044	Pulse duration
+P27045	Energy
+P25068	Reviews method
+P18071	Has
+P30000	paper:puplication_year
+P30001	hypothesis
+P30002	stand of hypothesis
+P30003	number of plant species
+P18072	status
+P18073	Test group size
+P20190	according to external source (not stated in paper)
+P20191	hasGenBank accession number
+P20192	has nucleotide substitution
+P20193	compared to
+P20194	has NCBI Reference Sequence accession number
+P23139	Type
+P18074	Inter-code agreement
+P18076	annotated abstracts
+P18077	Domains
+P18075	inter-coder agreement
+P18079	Material
+P18080	Data
+P23051	tune
+P23052	Size of Word Embeddings
+P23053	Number of Heads
+P23151	patient characteristics
+P18081	Material
+P18083	Q
+P18084	C
+P18082	Chemical formula
+P30017	Role
+P30018	Particle size range
+Image	Image
+P23169	N
+P23170	Clients
+P23171	Setting
+P23172	Intervention (protocol)
+P23173	Design
+P23174	Primary outcomes
+P23175	Qualitative findings
+P27050	Journals
+P27053	Conferences
+P27047	API support
+P20053	R0_estimates_(average)
+P20054	Estimated infectious period
+P20055	Estimated mean latent
+P20056	Estimated removed rate
+P20057	Initial ratio of isolating susceptible individuals
+P18085	Swelling coefficient
+P25069	Authors recommend
+P23029	cleaning algorithm
+P18087	Uses dataset
+P27059	Radiant exposure
+P26002	Global Mean Sea level Rise Projection
+P26003	has likely range
+P18095	estimated_cases
+P27056	Topics
+P18096	has categories
+P18097	Has organization
+P32117	Measure of disturbance
+P32118	Type of disturbance
+P26009	climate scenario
+P27035	Type of Laser
+P27036	Wavelength (λex)
+P27000	has part
+P27001	has part
+P18098	necessity
+P27057	Energy Device
+P18100	text data format
+P18101	data resources
+P23001	has numerical value
+P31001	paper:Study date
+P31002	Measure of species relationship
+P31003	Non-plant species
+P31004	Number of non-plant species
+P31005	Habitat
+P31006	WOS search or Cited references
+P18099	processing level
+P18102	subtasks
+P24000	Platform type
+P23079	with
+P23080	to make
+P23081	to remove
+P23082	compare with
+P23083	competitive sequence model
+P23084	on
+P23085	by
+P23086	further outperforms
+P23087	improves upon other dependency-based models
+P23088	comparing C-GCN model with the GCN model
+P23089	compared to the PA-LSTM
+P23090	with-entity evaluation
+P23091	incorporating off-path information
+P23092	mask-entity evaluation
+P23093	effect
+P23094	when
+P23095	when K = 1
+P23096	outperforming
+P23097	confirms our hypothesis
+P18103	level
+P18104	strength
+P18105	subjectivity
+P20105	develop
+P20106	transforms
+P20107	has basic components
+P20108	are
+P20109	composed of
+P20110	consists of three types of layers
+P20111	transform
+P20112	train
+P20113	integrate
+P20114	has two tasks
+P20115	introduces
+P20116	surpasses
+P20117	obtains
+P20118	consider
+P20119	on
+P20120	for
+TemplateComponentValidationRule	Template Component Validation Rule
+TemplateLabelFormat	Template Label Format
+TemplateStrict	TemplateStrict
+TemplateComponentOrder	TemplateComponentOrder
+TemplateComponentOccurrenceMin	TemplateComponentOccurrenceMin
+TemplateComponentOccurrenceMax	TemplateComponentOccurrenceMax
+P23104	Number
+P22060	software for consensus sequence generation
+P25000	Face features
+P19001	Upper confidence limit
+P19002	has study
+P27002	Libraries
+P30027	hasMetaVisualizationDefinition
+P20000	Case fatality ratio (CFR)
+P20001	Cumulative Incidence (CI)
+P20002	Infection fatality ratio (IFR)
+P20003	average estimated ratio between the actual number of individuals that have been infected and observed cases
+P20004	data1 description
+P20005	data1 source
+P20006	data2 description
+P20007	data2 source
+P20008	data3 description
+P20009	data3 source
+P20010	study dates
+P20013	Intrinsic growth rate
+P20014	Scaling of growth parameter
+P20011	Ascertainment Rate (q)
+P20012	Number of confirmed cases
+P20015	Number of deaths
+P20016	Percentage of total cases
+P27046	Research Infrastructure
+P27048	Books
+P27049	Chapters
+compareContribution	compare contribution
+hasProperty	has property
+hasPreviousVersion	has previous version
+hasSubject	has subject
+hasContent	has content
+P23105	Located in
+P23106	Exists at
+P20017	Scaling Types
+P20018	Research Questions
+P23103	Reviews
+P20019	Si precursor
+P20020	contacting electrode
+P20021	counter electrode
+P20022	(pseudo)reference electrode
+P20023	temperature
+P20024	process specification
+P20025	total estimated cases
+P20026	total confirmed cases
+P20027	susceptible
+P20028	infected
+P20029	removed
+P20030	achieves
+P20031	on
+P20032	learn
+P20033	recognizes
+P20034	framework
+P20035	identify
+P20036	apply
+P20037	implement
+P20038	consists of two modules
+P20039	recognize
+P20040	identifies
+P20041	evaluate
+P20042	evaluate on
+P20043	use
+P20044	with
+P20045	is
+P20046	used
+P20047	conduct
+P20048	on
+P20049	explore
+P20050	analyze
+P20058	reagent
+P20059	has kit
+P20060	has study design
+P20061	Symptomatic persons (with visits at high risk areas) or contacts of infected persons
+P20062	number of persons tested
+P20063	persons with viral genome sequencing
+P20064	open invitation
+P20065	random sample
+P20066	number of persons with viral genome sequenced
+P20067	Virus names in GISAID
+P20068	EPI accession numbers
+P20069	number of sequence variants
+P20070	GISAID URL
+P20085	Three sentence-pair similarity tasks
+P20086	Four natural language inference tasks
+P20087	reimplemented
+P20088	include
+P20089	take
+P20090	retain beta hyperparameters
+P20091	has decoupled weight decay
+P20092	keep
+P20093	deviate from the optimization
+P20094	uses a batch size
+P20095	done on
+P20096	took
+P20097	Fine-tuning is implemented based on
+P20098	has description
+P20099	Per-Task Results
+P20100	exceeds
+P20101	improves considerably
+P20102	substantially improves
+P20103	yields smaller improvements
+P20104	gains
+P27037	Material
+P27038	Data
+P20153	Use
+P20121	learning mappings
+P20122	to learn a function
+P20123	investigate
+P20124	show
+P20125	present
+P20126	experiment with
+P20127	added
+P20128	Augment
+P20129	Maxpooling
+P20130	concatenate
+P20131	concatenation
+P20132	perform
+P20133	Transformer Architecture
+P20134	Weight Initialization
+P20135	Post Transformer Layer
+P20136	Training Epochs
+P20137	Learning Rate (supervised)
+P20138	Batch Size (supervised)
+P20139	Learning Rate (few shot)
+P20140	Batch Size (few shot)
+P20141	adding positional information in the input
+P20142	Aim
+P20143	determine
+P20144	Use
+P20145	Learning rate
+P20146	Batch size
+P20147	Number of steps
+P20148	Relation representation
+P20149	increase
+P20150	very significant
+P20151	Report
+P20152	initializing
+P20154	deleted
+RelatedFigure	Related Figure
+P20156	is
+P20157	Max sentence length
+P20158	Adam learning rate
+P20159	Number of epochs
+P20160	Dropout rate
+P20161	compare our method, R-BERT, against
+P20162	beats
+P20163	MACRO F1 value
+P20164	create
+P20165	discard
+P20166	observe
+P20167	perform
+P20168	demonstrates
+P20169	is
+P20170	repeatedly encodes
+P20171	consisting of
+P20172	via
+P20173	to learn
+P20174	Reuse
+P20175	trained-on
+P20176	after pre-training
+P20177	use
+P20178	rate
+P20179	encodes
+P20180	tokenize input text
+P20181	creates
+P20182	iteratively merges
+P20183	requires
+P20184	add
+P20185	bias
+P20186	on
+P20187	TACRED dataset
+P20188	SemEval 2010 Task 8 dataset
+P20189	establishing
+P34115	Computational intelligence technologie
+P27011	Has dependent variable
+P27012	Has independent variable
+P21000	has company
+P21001	has SARS-CoV-2 reference genome
+P21002	differs to the NC_045512 reference genome
+P22000	pant presence or action
+P22001	type of data for model development
+P22002	ntry
+P22003	limate zone (köppen-geiger)
+P22004	intended
+P22005	type of building
+P22006	n of months
+P22007	predictors/devices
+P22008	rule-based models: schedule/profile
+P22009	rule-based models: other
+P22010	stochastic opa models: general/generalized linear model
+P22011	stochastic opa models: generalized linear mixed models
+P22012	stochastic opa models: linear mixed models
+P22013	stochastic opa models: linear time series model
+P22014	stochastic opa models: markov chain model
+P22015	stochastic opa models: agent-based model
+P22016	stochastic opa models: survival analysis
+P22017	stochastic opa models: probit analysis
+P22018	stochastic opa models: gaussian process
+P22019	stochastic opa models: bayesian network model
+P22020	stochastic opa models: decision tree model
+P22021	stochastic opa models: logit analysis
+P22022	stochastic opa models: hierarchical clustering model
+P22023	stochastic opa models: levy process
+P22024	stochastic opa models: monte carlo method
+P22025	stochastic opa models: poisson process
+P22026	stochastic opa models: bernoulli process
+P22027	stochastic opa models: hybrid model
+P22028	stochastic opa models: entropic-probabilistic approach
+P22029	stochastic opa models: other
+P22030	data-driven models: agglomerative hierarchical clustering
+P22031	data-driven models: random forest
+P22032	data-driven models: support vector regression
+P22033	data-driven models: support vector machine
+P22034	data-driven models: gradient boosting
+P22035	data-driven models: regularized logistic regression
+P22036	data-driven models: linear regression
+P22037	data-driven models: decision tree
+P22038	data-driven models: apriori
+P22039	data-driven models: density estimation
+P22040	data-driven models: k-means or k-medians
+P22041	data-driven models: bootstrap aggregation
+P22042	data-driven models: neural networks
+P22043	data-driven models: multilayer perceptron
+P22044	data-driven models: naive bayes
+P22045	data-driven models: nearest neighbour
+P22046	data-driven models: gaussian mixture
+P22047	data-driven models: hidden markov model
+P22048	data-driven models: arma, arima, etc..
+P22049	data-driven models: multi-layer perceptron
+P22050	data-driven models: genetic algorithm
+P22051	data-driven models: fuzzy logic
+P22052	data-driven models: pedestrian dead reckoning
+P22053	data-driven models: bayesian network model
+P22054	optimization based on the defined objective function
+P22055	data-driven models: other
+P22056	ity
+P22057	dimension of the sample (n. of rooms, buildings etc.)
+P34110	Has upper limit for 95% confidence interval
+P33030	HAS_RESULTS
+P25023	Material
+P25024	Data
+P23000	have nucleotide differences
+P23002	has qualifier
+P23003	participants (of which viral agents were sequenced)
+P23005	has international travel
+P23004	has compnay
+P23008	Used to
+P23017	Proportion of population sick on the worst day (Symptomatic cases-67% of all infected cases)
+P23018	Total (Consultations-40% of symptomatic cases seek consultations, possibly mainly telephone/internet)
+P23019	Proportion of population (Consultations-40% of symptomatic cases seek consultations, possibly mainly telephone/internet)
+P23020	Total (Severe cases likely to require hospitalisation-1.0% of symptomatic cases)
+P23021	Proportion of population (Severe cases likely to require hospitalisation-1.0% of symptomatic cases)
+P23022	Number of people in hospital on the worst day-if capacity existed (Severe cases likely to require hospitalisation-1.0% of symptomatic cases)
+P23023	Proportion of population in hospital on the worst day (Severe cases likely to require hospitalisation-1.0% of symptomatic cases)
+P23024	Total (Cases likely to require ICU-25% of hospitalised cases)
+P23025	People in ICU on the peak day-if capacities exist (Cases likely to require ICU-25% of hospitalised cases)
+P23026	Total (Cases likely to require ventilation in ICU-50% of those in ICU)
+P23027	Total Deaths
+P23028	Proportion of population (Deaths)
+P30004	type of experiment
+P25046	( > 2 % )
+P25047	slightly outperforms
+P25034	significantly outperforms
+P25035	including
+P25036	in
+P25037	to jointly model
+P25038	that only use
+P25039	indicates
+P25040	matches
+P25041	that use
+P23030	Biography
+P23033	pre-training and fine-tuning
+P23034	initialize
+P23035	pre-trained
+P23036	on
+P23037	with
+P23038	for
+P23039	used
+P23040	pre-trained for
+P23041	pre-trained on
+P23042	to
+P23043	outperformed
+P23044	in terms of
+P23045	RE results
+P23046	QA results
+P23047	obtained
+P23048	significantly outperformed
+P23049	of
+P23050	achieved
+P23054	Size of Hidden Layer
+P23055	Size of Position Embeddings
+P23056	Size of Attention Layer
+P23057	Number of Latent Entity Types
+P23058	Size of Mini-Batch
+P23059	Initial Learning Rate
+P23060	for
+P23061	L2 Regularization Coefficient
+P23062	from
+P23063	F1-score
+P23064	except
+P23066	with
+P23065	incorporate
+P25009	Niobate
+P25010	Co-Catalyst
+P25011	Light Source
+P25012	Sacrificial Reagent
+P25013	H2 Formation Rate
+P23098	indicating
+P23099	contextualizing
+P23100	makes it
+P23101	from
+P23102	removing
+P32123	Has TCR result
+P26005	has lower limit for likely range
+P26006	has upper limit for likely range
+P26016	Atmosphere Model Basic Approximations
+P26018	has atmosphere model name
+P26019	has results in atmosphere
+P26020	Atmosphere model family
+P26021	Has sea ice model name
+P26022	Has results for sea ice
+P26023	Has land surface model name
+P26024	Has prognostic land surface model variable
+P26025	has land surface model documentation
+P26026	Has aerosol model documentation
+P26027	Has aerosol model scheme
+P26028	Has prognostic sea ice model variable
+P26029	Has atmosphere model documentation
+P26030	Has horizontal atmosphere model resolution
+P26031	Has results in the ocean
+P26032	Has prognostic atmosphere model variable
+P26017	Dynamical core of atmosphere model
+P26036	Has ocean model version
+P26037	Has sea ice model documentation
+P26038	Has sea ice model version
+P26039	Has horizontal atmosphere model descretisation
+P26040	Land surface model basic approximations
+P26041	Ocean model basic approximations
+P26042	Sea ice model basic approximations
+P23118	AED evaluated
+P23119	2nd AED
+P23120	3rd AED
+P23121	4th AED
+P23122	No of cats
+P23123	Period of treatment or follow-up (months)
+P23124	Prevalence of adverse effects
+P23125	95% CI of cases that developed adverse effects
+P23126	Body system affected and adverse effects
+P23127	Most common adverse effects
+P23128	Adverse effect type
+P23129	Age of cats at seizure onset (years)
+P23130	Dose of AED(s) (mg/ kg)
+P23131	Serum levels of AED(s)
+P23132	Pre-treatment SF (seizures/ month or year)
+P23133	Post- treatment SF (seizures/ month or year)
+P23134	No of cats that were failures
+P23135	No of cats with >0% - <50% reduction in SF
+P23136	No of cats with ≥50% - <100% reduction in SF
+P23137	No of cats with 100% reduction in SF
+P23138	95% CI of successfully treated cases
+P23140	Basic reproduction number
+P26043	Atmospheric Chemistry Basic Approximations
+P26044	has prognostic atmospheric chemistry variable
+P26047	Has kernel function
+P26048	Has cost factor
+P26046	Has gamma
+P23141	due to
+P34059	number of papers
+P23142	Confidence interval (95%)
+P23145	Confidence interval
+P23146	Range of values
+P23147	Condition
+P23149	Duration
+P23143	Estimated cases
+P23144	Reported cases
+P23148	Data validity condition
+P23150	Participants' characteristics (of which viral agents were sequenced)
+P25060	Language/domain
+P25061	NEs found
+P25062	Technique used
+P25063	Dataset used
+P25064	Evaluation results
+P23152	Depressive disorder
+P23153	Age mean (SD)
+P23154	% Female
+P23155	% White
+P23156	Setting
+P23157	Recruitment
+P23158	Most distal followup
+P23159	Depression outcomes (sources)
+P23160	Quality
+P25059	Data used
+P25017	Semiconductor
+P25018	H2 Rate
+P25065	Has subfields
+P25066	Gatherable information
+P25067	Concept
+P23161	Population/Procedure, Sample size
+P23162	Intervention Group(s)
+P23163	Interventionist
+P23164	Study design
+P23165	Construct
+P23166	Measurement, Rater
+P23167	Significant Results
+P23168	Nonsignificant Results
+P25019	Nb-Based Material
+P25020	Main Products
+P25021	Observed Rate
+P24001	Communication Scheme
+P24003	Data I/O Rate
+P34119	C Statistic
+P24004	Apache Hadoop
+P24005	Real-time Processing
+P30026	hasMetaVisualization
+P24007	Iterative Task Support
+P24008	Describes approach
+P24009	Has definition
+P24011	placed in
+P24012	applicable in
+P24015	transient absorption:trapped holes
+P24016	transient absorption:trapped electrons
+P24017	conditions
+P24013	has goal
+P25025	performs
+P25026	yielding
+P25027	with the exception
+P25001	Weaknesses
+P25002	Problems
+P25003	Solutions
+P25004	Algorithm and Techniques
+P25007	precursors
+P25008	visible-light driven photocatalysis
+P25005	chemical doping method
+P25006	doping elements
+P25014	Material
+P25015	Data
+P25016	Process
+P25022	Case fatality rate
+P25028	out-performed by
+P25029	obtain
+P25030	When paired with
+P25031	performs on par with
+P25032	adding
+P25033	improves
+P25048	sets
+P25049	by gaining
+P25050	over
+P25051	with respect to
+P25042	got
+P25043	among
+P25044	more effective than
+P25045	without using
+P32122	Measure of propagule pressure
+P25052	achieve
+P25053	relies on
+P25054	achieving
+P25055	get
+P25056	already outperforms
+P25057	demonstrating the advantage of
+P25058	achieves slightly better performance than
+P28008	Total Cases
+P25070	Answer
+P25071	Has characteristics
+P25072	Attributes
+P25073	Retinal Dissease
+P25074	Learning approach
+subProblem	Sub Problem
+P26000	data dource
+P26001	total cases worldwide
+P33018	Offer functions
+P33021	Important aspects to consider
+P33016	Data Storage
+P33019	Developement
+P33020	Recent Developement
+P29005	PubChemAID
+P29006	has assay footprint
+P29007	assay measurement type
+P28002	day
+P29008	uses detection instrument
+P28003	month
+P26004	has base line
+P26007	has  start of period
+P26008	has end of period
+P26010	Has prognostic ocean variable
+P26011	has ocean result
+P26012	Ocean model family
+P26013	Ocean vertical physics
+P26014	has horizontal ocean model resolution
+P26015	Has ocean model documantation
+P26033	Has atmosphere model version
+P26034	Has ocean model name
+P26035	Has horizontal ocean model discretisation
+P29000	Translation
+P29001	Material
+P29002	Data
+P29003	Process
+P26045	has C parameter
+P26049	Estimated_cases_with
+P28005	has layer
+P28006	responsible for
+P27003	Evacuation Strategies
+P27004	section
+P29013	Has hypothesis
+P29014	deleted
+P27005	Study category
+P27006	Experimental details
+P27007	Variables that resulted in significant effects
+P27008	Statistics used
+P27009	Variables that resulted in non-significant effects
+P27010	Effect size
+P27013	Has number of votes
+P27014	Has participants
+P27015	Has buildings
+P27016	Has offices
+P27017	Length
+P27018	Days
+P27019	Study type
+P27030	Continent
+P27032	Observed value
+P27020	Type of buildings
+P27021	Building systems
+P27022	Study location
+P27026	Number of offices
+P27023	% of female
+P27024	Number of participants
+P27025	Number of buildings
+P27027	HVAC type
+P27028	Lighting type
+P27029	Region of data collection
+P28007	has Wikipedia description
+P29004	has capabilities
+P27034	Organism
+P27033	Growth rate
+P28004	deleted
+P33051	R59704
+P33052	R59706
+P33053	R59708
+P33054	R59710
+P33055	R59712
+P33056	R59714
+P33057	R59716
+P33058	R59718
+P33059	R59720
+P33060	R59722
+P33061	R59724
+P33062	R59726
+P33114	R60079
+P33115	R60081
+P33116	R60083
+P33067	R59767
+P33068	R59769
+P33069	R59771
+P33070	R59773
+P33071	R59775
+P33072	R59777
+P33073	R59779
+P33074	R59781
+P33078	R59839
+P33079	R59841
+P33080	R59843
+P33081	R59845
+P33082	R59847
+P33083	R59849
+P33084	R59851
+P33085	R59853
+P33086	R59855
+P33087	R59857
+P33088	R59859
+P33089	R59861
+P33090	R59922
+P33091	R59924
+P33092	R59926
+P33093	R59928
+P33094	R59930
+P33095	R59932
+P33096	R59934
+P33097	R59936
+P33098	R59938
+P33099	R59940
+P33100	R59942
+P33101	R59944
+P33102	R59996
+P33103	R59998
+P33104	R60000
+P33105	R60002
+P33106	R60004
+P33107	R60006
+P33108	R60008
+P33109	R60010
+P33110	R60012
+P33111	R60014
+P33112	R60016
+P33113	R60018
+P33117	R60085
+P33118	R60087
+P33119	R60089
+P33120	R60091
+P33121	R60093
+P33122	R60095
+P33123	R60097
+P33124	R60099
+P33125	R60101
+P33126	R60103
+P33127	R60105
+P33128	R60107
+P33131	R60172
+P33132	R60174
+P33133	R60176
+P33134	R60178
+P33135	R60180
+P33136	R60182
+P33137	R60184
+P33138	R60186
+P33139	R60188
+P33140	R60190
+P33143	R63790
+P33144	R63792
+P33145	R63794
+P33146	R63796
+P33147	R63798
+P33148	R63800
+P33149	R63802
+P33150	R63804
+P33151	R63806
+P33152	R63808
+P33153	Scaling type
+P33154	Data I/O Performance
+P34006	paper: authors
+P34020	Stakeholders
+P34019	Potentially useful techniques
+P34003	Knowledge derived from
+P34018	Foundation for integration of
+P34001	Has trend
+P34002	Becoming a requirement for
+P34004	Important for
+P34005	Reason
+P34007	paper: research_field
+P34016	tissue consumed by larvae
+P34008	Create "has_host"
+P34009	Create "has_host"
+P34010	Create "has_host"
+P34011	Create "has_host"
+P34012	Create "has_host"
+P34013	Create "has_host"
+P34015	larval habit inside or outside of host
+P34038	has target
+P34021	Infection
+P34022	CI Tech
+P34037	has toxin
+P34039	Gesellschaft zur Zeit der Konzeptentwicklung
+P34040	Staatsform zur Zeit der Konzeptentwicklung
+P34023	NPV
+P34032	has lysine catabolic pathway type
+P34033	has lysine catabolic pathway type
+P34034	has lysine catabolic pathway type
+P34035	has lysine catabolic pathway type
+P34036	has lysine catabolic pathway type
+P34024	Material
+P34025	Data
+P34026	Process
+P34027	Method
+P34028	Material
+P34029	Data
+P34030	Process
+P34031	Method
+P34041	Soziale Arbeit als Institution
+P34042	gesellschaftliche Funktion Sozialer Arbeit
+P34043	Auftraggeber
+P34044	Funktion Sozialer Arbeit
+P34047	Vergesellschaftungsprozess
+P34048	Ressourcen
+P34049	Definitionsmacht
+P34050	Macht von - Macht über
+P34051	Repräsentationsform
+P34052	Lebenslage Adressat*innen
+P34053	Lebenslage Sozialarbeiter*innen
+P34054	angestrebte Macht der Adressat*innen
+P34055	Ebene der Verhandlung
+P34056	Bewegungshintergrund
+P34045	Adressat*innen
+P34046	Perspektive/Ziel Sozialer Arbeit
+P34062	Concept types
+P34063	Dataset name
+P34064	number concepts
+P34069	Process
+P34070	Material
+P34071	Data
+P34097	Material
+P34065	Material
+P34066	Data
+P34067	Process
+P34068	Method
+P34072	Method
+P34073	Payment Scheme
+P34074	Payment Scheme
+P34075	Knowledge Graph Type
+P34076	Knowledge Graph Semantics
+P34077	Knowledge Graph Selection
+P34078	Reuse Of Knowledge Graph
+P34079	Number Of Knowledge Graphs
+P34080	Machine Learning Input
+P34081	Machine Learning Method
+P34082	Machine Learning Task
+P34083	Machine Learning Model Integration
+P34084	Explanation Form
+P34085	Explanation Type
+P34086	Explanation Interpretability
+P34111	Performance:Precision
+P34112	Performance:Sensitivity
+P34096	RUIHUI MU
+P34087	do not incorporate
+P34088	above it
+P34089	constructs and labels
+P34090	To capture
+P34091	have
+P34092	used in
+P34093	dimensions
+P34094	updating
+P34095	gradient clipping
