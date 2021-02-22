@@ -13,7 +13,7 @@ sh = logging.StreamHandler(sys.stdout)
 log.addHandler(sh)
 newline = '\n'  # os.linesep
 orkg = ORKG(host="https://www.orkg.org/orkg")
-path = "./datasets/ORKG/"
+path = "../datasets/ORKG/"
 batch_size = 500
 
 
@@ -106,8 +106,9 @@ def write_orkg_relations():
 def write_orkg_entities():
     log.info("Fetching resources from ORKG")
     orkg_resources = orkg.resources.get(items=9999999).content
-    log.info("Fetching literals from ORKG")
-    orkg_resources += orkg.literals.get_all().content
+    log.info("Fetching literals from ORKG & filtering empty labels")
+    literals = [l for l in filter(lambda l: len(l['label']) > 0, orkg.literals.get_all().content)]
+    orkg_resources += literals
     entities = []
     for orkg_resource in orkg_resources:
         entities.append(orkg_resource['id'])
@@ -187,6 +188,6 @@ def write_orkg_statements_backup():
 
 
 if __name__ == '__main__':
-    # write_orkg_relations()
-    # write_orkg_entities()
+    write_orkg_relations()
+    write_orkg_entities()
     write_orkg_statements_new()
