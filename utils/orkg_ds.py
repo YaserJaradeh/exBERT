@@ -105,8 +105,9 @@ def write_orkg_relations():
 
 
 def write_orkg_entities():
-    log.info("Fetching resources from ORKG")
+    log.info("Fetching resources from ORKG & filtering empty labels")
     orkg_resources = orkg.resources.get(items=9999999).content
+    orkg_resources = [r for r in filter(lambda r: len(r['label']) > 0, orkg_resources)]
     log.info("Fetching literals from ORKG & filtering empty labels")
     literals = [l for l in filter(lambda l: len(l['label']) > 0, orkg.literals.get_all().content)]
     orkg_resources += literals
@@ -189,6 +190,6 @@ def write_orkg_statements_backup():
 
 
 if __name__ == '__main__':
-    # write_orkg_relations()
-    # write_orkg_entities()
+    write_orkg_relations()
+    write_orkg_entities()
     write_orkg_statements_new()
