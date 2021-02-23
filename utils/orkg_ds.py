@@ -3,7 +3,7 @@ import os
 import sys
 import math
 from typing import List, Tuple
-
+from forbiddenfruit import curse
 from orkg import ORKG
 from sklearn.model_selection import train_test_split
 
@@ -15,6 +15,13 @@ newline = '\n'  # os.linesep
 orkg = ORKG(host="https://www.orkg.org/orkg")
 path = "../datasets/ORKG/"
 batch_size = 500
+
+
+def _clean_string(string: str) -> str:
+    return string.strip().replace('\n', ' ').replace('\t', ' ').replace('  ', ' ')
+
+
+curse(str, "clean", _clean_string)
 
 
 def _write_relations_file(data_dir: str, relations: List[str]):
@@ -51,14 +58,14 @@ def _write_relation2text_file(data_dir: str, relations: List[Tuple[str, str]]):
     log.info(f"Writing relation2text file {data_dir}")
     with open(os.path.join(data_dir, "relation2text.txt"), 'w', encoding='utf-8') as f:
         for relation_id, relation_label in relations:
-            f.write(f'{relation_id}\t{relation_label}{newline}')
+            f.write(f'{relation_id}\t{relation_label.clean()}{newline}')
 
 
 def _write_entity2text_file(data_dir: str, entities: List[Tuple[str, str]]):
     log.info(f"Writing entity2text file {data_dir}")
     with open(os.path.join(data_dir, "entity2text.txt"), 'w', encoding='utf-8') as f:
         for entity_id, entity_label in entities:
-            f.write(f'{entity_id}\t{entity_label}{newline}')
+            f.write(f'{entity_id}\t{entity_label.clean()}{newline}')
 
 
 def _write_datasets_file(data_dir: str, file_type: str, content: List[Tuple[str, str, str]]):
@@ -116,7 +123,7 @@ def write_orkg_entities():
         entities.append(orkg_resource['id'])
     _write_entities_file(path, entities)
     _write_entity2id_file(path, list(enumerate(entities)))
-    _write_entity2text_file(path, [(r['id'], r['label'].strip().replace('\n', '')) for r in orkg_resources])
+    _write_entity2text_file(path, [(r['id'], r['label']) for r in orkg_resources])
 
 
 def write_orkg_statements():
@@ -152,14 +159,14 @@ def _get_n_statements_starting_from_x(n_statements: int, x_page: int = 1):
     result = []
     pages = math.ceil(n_statements / batch_size)
     for page in range(x_page, x_page + pages):
-        log.info(f"Fetching statements {page-x_page+1}/{pages}")
+        log.info(f"Fetching statements {page - x_page + 1}/{pages}")
         result += orkg.statements.get(items=min(n_statements - len(result), batch_size), page=page).content
     return result, x_page + pages + 1
 
 
 def write_orkg_statements_new():
     log.info("Fetching statements from ORKG")
-    orkg_statements, new_page = _get_n_statements_starting_from_x(1000*1000)
+    orkg_statements, new_page = _get_n_statements_starting_from_x(1000 * 1000)
     orkg_statements = filter_out_unwanted_statements(orkg_statements)
     X_train, X_test = train_test_split(orkg_statements, test_size=0.2, random_state=1)
     X_train, X_val = train_test_split(X_train, test_size=0.25, random_state=1)
