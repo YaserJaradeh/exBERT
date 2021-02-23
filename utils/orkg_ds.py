@@ -63,10 +63,11 @@ def _write_entity2text_file(data_dir: str, entities: List[Tuple[str, str]]):
 
 def _write_datasets_file(data_dir: str, file_type: str, content: List[Tuple[str, str, str]]):
     log.info(f"Writing {file_type} file in {data_dir}")
+    relations, entities = create_ids_dict(data_dir)
     with open(os.path.join(data_dir, f"{file_type}.tsv"), 'w', encoding='utf-8') as f:
         for subj, pred, obj in content:
-            f.write(f'{subj}\t{pred}\t{obj}{newline}')
-    relations, entities = create_ids_dict(data_dir)
+            if subj in entities and obj in entities and pred in relations:
+                f.write(f'{subj}\t{pred}\t{obj}{newline}')
     with open(os.path.join(data_dir, f"{file_type}2id.txt"), 'w', encoding='utf-8') as f:
         f.write(f'{len(content)}{newline}')
         for subj, pred, obj in content:
@@ -188,6 +189,6 @@ def write_orkg_statements_backup():
 
 
 if __name__ == '__main__':
-    write_orkg_relations()
-    write_orkg_entities()
+    # write_orkg_relations()
+    # write_orkg_entities()
     write_orkg_statements_new()
