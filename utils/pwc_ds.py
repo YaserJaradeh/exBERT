@@ -1,15 +1,24 @@
 from paperswithcode import PapersWithCodeClient
 from typing import Union, List
 import datetime
+import os
 
 client = PapersWithCodeClient()
 papers = {}
+areas = {}
+methods = {}
+tasks = {}
+datasets = {}
+evaluations = {}
 conferences = {}
 proceedings = {}
 literals = {}
 relations = {}
 literal_counter = 1
 triples = []
+
+newline = '\n'  # os.linesep
+path = "../datasets/PWC/"
 
 
 def method_factory(method_type: str):
@@ -20,6 +29,11 @@ def method_factory(method_type: str):
     mapper = {'conference': conferences,
               'proceeding': proceedings,
               'paper': papers,
+              'area': areas,
+              'method': methods,
+              'task': tasks,
+              'evaluation': evaluations,
+              'dataset': datasets,
               'relation': relations
               }
     if method_type not in mapper:
@@ -59,29 +73,76 @@ def method_factory(method_type: str):
     return insert
 
 
-if __name__ == '__main__':
-    # method_factory('relation')("is_a")
+def fetch_component(component_type: str, max_pages: int):
     page = 1
     while page is not None:
         try:
-            paper_list = client.paper_list(page=page)
-            page = paper_list.next_page
-            for paper in paper_list.results:
-                paper_id = method_factory('paper')(paper.id)
-                # triples.append((paper.id, "is_a", ""))
-                for field, value in paper:
-                    if value is None:
+            component_list = eval(f'client.{component_type}_list(page=page)')
+            page = component_list.next_page
+            for component in component_list.results:
+                component_id = method_factory(component_type)(component.id)
+                for field, value in component:
+                    if value is None or (isinstance(value, str) and len(value) == 0):
                         continue
                     if field == 'id':
                         continue
                     value_id = method_factory(field)(value)
-                    property_name = f"has_{field}"
+                    property_name = f"has {field}"
                     relation_id = method_factory('relation')(property_name)
-                    triples.append((paper_id, relation_id, value_id))
-            print(f'Ganna process page {page} yippee!')
+                    triples.append((component_id, relation_id, value_id))
         except:
-            print(f'oh-oh {page} is crappy! Skipping!')
+            print(f'Oh-oh {component_type}\'s page <{page}> is crappy! Skipping!')
             page += 1
-        # if page == 3:
-        #     break
+        if page is None or page >= max_pages:
+            break
+        print(f'Ganna process {component_type}\'s page {page}. Yippee!')
+
+
+def fetch_papers(max_pages: int = 100):
+    fetch_component('paper', max_pages)
+
+
+def fetch_areas(max_pages: int = 10):
+    fetch_component('area', max_pages)
+
+
+def fetch_conferences(max_pages: int = 100):
+    fetch_component('conference', max_pages)
+
+
+def fetch_methods(max_pages: int = 100):
+    fetch_component('method', max_pages)
+
+
+def fetch_tasks(max_pages: int = 100):
+    fetch_component('task', max_pages)
+
+
+def fetch_datasets(max_pages: int = 100):
+    fetch_component('dataset', max_pages)
+
+
+def fetch_evaluations(max_pages: int = 100):
+    fetch_component('evaluation', max_pages)
+
+
+def create_dataset_files():
+    with open(os.path.join(path, "relations.txt"), 'w', encoding='utf-8') as relations_f, open(os.path.join(path, "relation2id.txt"), 'w', encoding='utf-8') as relations_ids_f, open(os.path.join(path, "relation2text.txt"), 'w', encoding='utf-8') as relations_text_f:
+        relations_ids_f.write(f'{len(relations)}{newline}')
+        for index, (relation_label, relation_id) in enumerate(relations.items()):
+            relations_ids_f.write(f'{relation_id}\t{index}{newline}')
+            relations_text_f.write(f'{relation_id}\t{relation_label}{newline}')
+            relations_f.write(f'{relation_id}{newline}')
+
+
+if __name__ == '__main__':
+    fetch_evaluations(3)
+    fetch_datasets(3)
+    fetch_tasks(3)
+    fetch_methods(3)
+    fetch_conferences(3)
+    fetch_areas(3)
+    fetch_papers(3)
+    create_dataset_files()
+
 # Deal with list in the triples (object of has_authors)
