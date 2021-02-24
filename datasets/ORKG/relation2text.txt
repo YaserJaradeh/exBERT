@@ -457,7 +457,7 @@ P7162	Fixed grid
 P7163	major ice sheets
 P7164	static ice
 P7165	Minor ice caps
-P7166	The horizontal discretisation is on an orthogonal curvilinear grid nominally one degree for both longitude and latitude. refinements: (1) a tripolar grid north of 65°N ; (2) a cosine dependent (Mercator) grid  south of 30°S; (3) a refinement of latitudinal spacing to 1/3°  between 10°S and 10°N
+P7166	The horizontal discretisation is on an orthogonal curvilinear grid nominally one degree for both longitude and latitude. refinements: (1) a tripolar grid north of 65°N ; (2) a cosine dependent (Mercator) grid south of 30°S; (3) a refinement of latitudinal spacing to 1/3° between 10°S and 10°N
 P7168	even coverage
 P7169	well resolved
 P7170	not stained
@@ -467,7 +467,7 @@ P15020	OfflineDatabase
 P7171	poorly resolved
 P15023	Advantages
 P15024	Disadvantages
-P7172	Oki T., and Y.C. Sud (1998) Design of the Total Runoff Integrating Pathways [TRIP] - A global river channel network.. Earth Interactions, 2.       Add to Favorites Track Citation Download Citation Email   https://doi.org/10.1175/1087-3562(1998)002<0001:DOTRIP>2.3.CO;2
+P7172	Oki T., and Y.C. Sud (1998) Design of the Total Runoff Integrating Pathways [TRIP] - A global river channel network.. Earth Interactions, 2.    Add to Favorites Track Citation Download Citation Email  https://doi.org/10.1175/1087-3562(1998)002<0001:DOTRIP>2.3.CO;2
 P7173	Cold deep snow albedo
 P7174	Bare ice albedo
 P7175	Melting deep snow albedo
@@ -487,7 +487,7 @@ P7183	Tripleclouds scheme
 P7189	Bias of global mean surface air temperature against ERA-Interim reanalysis
 P15021	Classifier
 P7191	Bias of mean surface temperature over northern hemisphere land against ERA-Interim reanalysis:
-P7192	Bias of mean surface temperature over high latitudes Southern Ocean (>60°)  against ERA-Interim reanalysis
+P7192	Bias of mean surface temperature over high latitudes Southern Ocean (>60°) against ERA-Interim reanalysis
 P7193	Bias of mean surface temperature over high latitudes Southern Ocean (>60°) against ERA-Interim reanalysis
 P7194	Bias of global mean precipitation against GPCP climatology
 P7195	Cloud scheme
@@ -1560,7 +1560,7 @@ P15658	Variables (1)
 P15659	Economies of Scale
 P15660	Other Measurements
 P15661	Functional specification
-P15662	Scale economies evaluated  in the approximation point
+P15662	Scale economies evaluated in the approximation point
 P15663	Disclosures
 P15664	Anonymistion approaches
 P15665	Background information
@@ -1686,7 +1686,7 @@ P23109	Study design
 P23110	Blinding of outcome assessment
 P23111	Randomization
 P23112	allocation concealment
-P23113	Incomplete outcome   data
+P23113	Incomplete outcome  data
 P23114	Selective reporting
 P23115	other sources of bias
 P23116	Disease definitions (characterization)
@@ -2394,7 +2394,7 @@ P28002	day
 P29008	uses detection instrument
 P28003	month
 P26004	has base line
-P26007	has  start of period
+P26007	has start of period
 P26008	has end of period
 P26010	Has prognostic ocean variable
 P26011	has ocean result
