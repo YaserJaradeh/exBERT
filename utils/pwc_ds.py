@@ -127,12 +127,30 @@ def fetch_evaluations(max_pages: int = 100):
 
 
 def create_dataset_files():
+    # Write relations
     with open(os.path.join(path, "relations.txt"), 'w', encoding='utf-8') as relations_f, open(os.path.join(path, "relation2id.txt"), 'w', encoding='utf-8') as relations_ids_f, open(os.path.join(path, "relation2text.txt"), 'w', encoding='utf-8') as relations_text_f:
         relations_ids_f.write(f'{len(relations)}{newline}')
         for index, (relation_label, relation_id) in enumerate(relations.items()):
             relations_ids_f.write(f'{relation_id}\t{index}{newline}')
             relations_text_f.write(f'{relation_id}\t{relation_label}{newline}')
             relations_f.write(f'{relation_id}{newline}')
+    # Write entities
+    entities = papers.copy()
+    entities.update(areas)
+    entities.update(methods)
+    entities.update(tasks)
+    entities.update(datasets)
+    entities.update(evaluations)
+    entities.update(conferences)
+    entities.update(proceedings)
+    entities.update(literals)
+    with open(os.path.join(path, "entities.txt"), 'w', encoding='utf-8') as entities_f, open(os.path.join(path, "entity2id.txt"), 'w', encoding='utf-8') as entities_ids_f, open(os.path.join(path, "entity2text.txt"), 'w', encoding='utf-8') as entities_text_f:
+        entities_ids_f.write(f'{len(entities)}{newline}')
+        for index, (entity_label, entity_id) in enumerate(entities.items()):
+            entities_ids_f.write(f'{entity_id}\t{index}{newline}')
+            clean_entity_label = entity_label.replace("\t", "").replace("\n", "").replace("\r\n", "")
+            entities_text_f.write(f'{entity_id}\t{clean_entity_label}{newline}')
+            entities_f.write(f'{entity_id}{newline}')
 
 
 if __name__ == '__main__':
