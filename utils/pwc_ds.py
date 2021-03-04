@@ -148,7 +148,7 @@ def create_dataset_files():
         entities_ids_f.write(f'{len(entities)}{newline}')
         for index, (entity_label, entity_id) in enumerate(entities.items()):
             entities_ids_f.write(f'{entity_id}\t{index}{newline}')
-            clean_entity_label = entity_label.replace("\t", "").replace("\n", "").replace("\r\n", "")
+            clean_entity_label = entity_label.strip().replace('\r\n', '').replace("\t", "").replace("\n", "")
             entities_text_f.write(f'{entity_id}\t{clean_entity_label}{newline}')
             entities_f.write(f'{entity_id}{newline}')
 
