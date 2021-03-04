@@ -6,7 +6,7 @@ from typing import List, Tuple
 from forbiddenfruit import curse
 from orkg import ORKG
 from sklearn.model_selection import train_test_split
-from .functions import convert_ids_to_dict as _convert_ids_to_dict
+from utils.functions import write_datasets_file, write_stats, create_ids_dict
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -14,7 +14,7 @@ sh = logging.StreamHandler(sys.stdout)
 log.addHandler(sh)
 newline = '\n'  # os.linesep
 orkg = ORKG(host="https://www.orkg.org/orkg")
-path = "../datasets/ORKG/"
+path = "../datasets/ORKG21/"
 batch_size = 500
 
 
@@ -69,26 +69,6 @@ def _write_entity2text_file(data_dir: str, entities: List[Tuple[str, str]]):
             f.write(f'{entity_id}\t{entity_label.clean()}{newline}')
 
 
-def _write_datasets_file(data_dir: str, file_type: str, content: List[Tuple[str, str, str]]):
-    log.info(f"Writing {file_type} file in {data_dir}")
-    relations, entities = create_ids_dict(data_dir)
-    with open(os.path.join(data_dir, f"{file_type}.tsv"), 'w', encoding='utf-8') as f:
-        for subj, pred, obj in content:
-            if subj in entities and obj in entities and pred in relations:
-                f.write(f'{subj}\t{pred}\t{obj}{newline}')
-    with open(os.path.join(data_dir, f"{file_type}2id.txt"), 'w', encoding='utf-8') as f:
-        f.write(f'{len(content)}{newline}')
-        for subj, pred, obj in content:
-            if subj in entities and obj in entities and pred in relations:
-                f.write(f'{entities[subj]}\t{relations[pred]}\t{entities[obj]}{newline}')
-
-
-def create_ids_dict(data_dir):
-    relations = _convert_ids_to_dict(data_dir, 'relation')
-    entities = _convert_ids_to_dict(data_dir, 'entity')
-    return relations, entities
-
-
 def write_orkg_relations():
     log.info("Fetching predicates from ORKG")
     orkg_predicates = orkg.predicates.get(items=9999999).content
@@ -126,12 +106,12 @@ def write_orkg_statements():
     X_train, X_test = train_test_split(orkg_statements, test_size=0.2, random_state=1)
     X_train, X_val = train_test_split(X_train, test_size=0.25, random_state=1)
     log.info("Writing datasets")
-    _write_datasets_file(path, 'train',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_train])
-    _write_datasets_file(path, 'dev',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_val])
-    _write_datasets_file(path, 'test',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_test])
+    write_datasets_file(path, 'train',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_train])
+    write_datasets_file(path, 'dev',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_val])
+    write_datasets_file(path, 'test',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_test])
 
 
 def filter_out_unwanted_statements(orkg_statements):
@@ -160,12 +140,14 @@ def write_orkg_statements_new():
     X_train, X_test = train_test_split(orkg_statements, test_size=0.2, random_state=1)
     X_train, X_val = train_test_split(X_train, test_size=0.25, random_state=1)
     log.info("Writing datasets")
-    _write_datasets_file(path, 'train',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_train])
-    _write_datasets_file(path, 'test',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_test])
-    _write_datasets_file(path, 'dev',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_val])
+    write_datasets_file(path, 'train',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_train])
+    write_datasets_file(path, 'test',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_test])
+    write_datasets_file(path, 'dev',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in X_val])
+    relations, entities = create_ids_dict(path)
+    write_stats(path, entities, relations, orkg_statements)
 
 
 def write_orkg_statements_backup():
@@ -173,16 +155,16 @@ def write_orkg_statements_backup():
     orkg_statements, new_page = _get_n_statements_starting_from_x(600, 1)
     orkg_statements = filter_out_unwanted_statements(orkg_statements)
     log.info("Writing datasets")
-    _write_datasets_file(path, 'train',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in orkg_statements])
+    write_datasets_file(path, 'train',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in orkg_statements])
     orkg_statements, new_page2 = _get_n_statements_starting_from_x(200, new_page)
     orkg_statements = filter_out_unwanted_statements(orkg_statements)
-    _write_datasets_file(path, 'test',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in orkg_statements])
+    write_datasets_file(path, 'test',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in orkg_statements])
     orkg_statements, _ = _get_n_statements_starting_from_x(200, new_page2)
     orkg_statements = filter_out_unwanted_statements(orkg_statements)
-    _write_datasets_file(path, 'dev',
-                         [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in orkg_statements])
+    write_datasets_file(path, 'dev',
+                        [(st['subject']['id'], st['predicate']['id'], st['object']['id']) for st in orkg_statements])
 
 
 if __name__ == '__main__':

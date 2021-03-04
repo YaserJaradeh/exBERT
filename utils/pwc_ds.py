@@ -3,6 +3,7 @@ from typing import Union, List, Tuple
 import datetime
 import os
 from sklearn.model_selection import train_test_split
+from utils.functions import write_datasets_file, write_stats
 
 client = PapersWithCodeClient()
 papers = {}
@@ -19,7 +20,7 @@ literal_counter = 1
 triples = []
 
 newline = '\n'  # os.linesep
-path = "../datasets/PWC/"
+path = "../datasets/PWC21/"
 
 
 def method_factory(method_type: str):
@@ -127,21 +128,11 @@ def fetch_evaluations(max_pages: int = 100):
     fetch_component('evaluation', max_pages)
 
 
-def _write_datasets_file(data_dir: str, file_type: str, content: List[Tuple[str, str, str]]):
-    with open(os.path.join(data_dir, f"{file_type}.tsv"), 'w', encoding='utf-8') as f:
-        for subj, pred, obj in content:
-            if subj in entities and obj in entities and pred in relations:
-                f.write(f'{subj}\t{pred}\t{obj}{newline}')
-    with open(os.path.join(data_dir, f"{file_type}2id.txt"), 'w', encoding='utf-8') as f:
-        f.write(f'{len(content)}{newline}')
-        for subj, pred, obj in content:
-            if subj in entities and obj in entities and pred in relations:
-                f.write(f'{entities[subj]}\t{relations[pred]}\t{entities[obj]}{newline}')
-
-
 def create_dataset_files():
     # Write relations
-    with open(os.path.join(path, "relations.txt"), 'w', encoding='utf-8') as relations_f, open(os.path.join(path, "relation2id.txt"), 'w', encoding='utf-8') as relations_ids_f, open(os.path.join(path, "relation2text.txt"), 'w', encoding='utf-8') as relations_text_f:
+    with open(os.path.join(path, "relations.txt"), 'w', encoding='utf-8') as relations_f, open(
+            os.path.join(path, "relation2id.txt"), 'w', encoding='utf-8') as relations_ids_f, open(
+            os.path.join(path, "relation2text.txt"), 'w', encoding='utf-8') as relations_text_f:
         relations_ids_f.write(f'{len(relations)}{newline}')
         for index, (relation_label, relation_id) in enumerate(relations.items()):
             relations_ids_f.write(f'{relation_id}\t{index}{newline}')
@@ -157,28 +148,43 @@ def create_dataset_files():
     entities.update(conferences)
     entities.update(proceedings)
     entities.update(literals)
-    with open(os.path.join(path, "entities.txt"), 'w', encoding='utf-8') as entities_f, open(os.path.join(path, "entity2id.txt"), 'w', encoding='utf-8') as entities_ids_f, open(os.path.join(path, "entity2text.txt"), 'w', encoding='utf-8') as entities_text_f:
+    with open(os.path.join(path, "entities.txt"), 'w', encoding='utf-8') as entities_f, open(
+            os.path.join(path, "entity2id.txt"), 'w', encoding='utf-8') as entities_ids_f, open(
+            os.path.join(path, "entity2text.txt"), 'w', encoding='utf-8') as entities_text_f:
         entities_ids_f.write(f'{len(entities)}{newline}')
         for index, (entity_label, entity_id) in enumerate(entities.items()):
             entities_ids_f.write(f'{entity_id}\t{index}{newline}')
             clean_entity_label = entity_label.strip().replace('\r\n', '').replace("\t", "").replace("\n", "")
             entities_text_f.write(f'{entity_id}\t{clean_entity_label}{newline}')
             entities_f.write(f'{entity_id}{newline}')
+    # Pre-process triples
+    new_triples = []
+    for t in triples:
+        if isinstance(t[2], list):
+            for item in t[2]:
+                new_triples.append((t[0], t[1], item))
+        else:
+            new_triples.append(t)
     # Split Into train/test/dev
-    X_train, X_test = train_test_split(triples, test_size=0.2, random_state=1)
+    X_train, X_test = train_test_split(new_triples, test_size=0.2, random_state=1)
     X_train, X_val = train_test_split(X_train, test_size=0.25, random_state=1)
     # Write train/test/dev to files
+    write_datasets_file(path, 'train', X_train)
+    write_datasets_file(path, 'test', X_test)
+    write_datasets_file(path, 'dev', X_val)
+    write_stats(path, entities, relations, new_triples)
 
+
+def create_pwc_dataset(pages: int = 20):
+    fetch_evaluations(pages)
+    fetch_datasets(pages)
+    fetch_tasks(pages)
+    fetch_methods(pages)
+    fetch_conferences(pages)
+    fetch_areas(pages)
+    fetch_papers(pages * 10)
+    create_dataset_files()
 
 
 if __name__ == '__main__':
-    fetch_evaluations(3)
-    fetch_datasets(3)
-    fetch_tasks(3)
-    fetch_methods(3)
-    fetch_conferences(3)
-    fetch_areas(3)
-    fetch_papers(3)
-    create_dataset_files()
-
-# Deal with list in the triples (object of has_authors)
+    create_pwc_dataset()
