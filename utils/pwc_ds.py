@@ -1,7 +1,8 @@
 from paperswithcode import PapersWithCodeClient
-from typing import Union, List
+from typing import Union, List, Tuple
 import datetime
 import os
+from sklearn.model_selection import train_test_split
 
 client = PapersWithCodeClient()
 papers = {}
@@ -126,6 +127,18 @@ def fetch_evaluations(max_pages: int = 100):
     fetch_component('evaluation', max_pages)
 
 
+def _write_datasets_file(data_dir: str, file_type: str, content: List[Tuple[str, str, str]]):
+    with open(os.path.join(data_dir, f"{file_type}.tsv"), 'w', encoding='utf-8') as f:
+        for subj, pred, obj in content:
+            if subj in entities and obj in entities and pred in relations:
+                f.write(f'{subj}\t{pred}\t{obj}{newline}')
+    with open(os.path.join(data_dir, f"{file_type}2id.txt"), 'w', encoding='utf-8') as f:
+        f.write(f'{len(content)}{newline}')
+        for subj, pred, obj in content:
+            if subj in entities and obj in entities and pred in relations:
+                f.write(f'{entities[subj]}\t{relations[pred]}\t{entities[obj]}{newline}')
+
+
 def create_dataset_files():
     # Write relations
     with open(os.path.join(path, "relations.txt"), 'w', encoding='utf-8') as relations_f, open(os.path.join(path, "relation2id.txt"), 'w', encoding='utf-8') as relations_ids_f, open(os.path.join(path, "relation2text.txt"), 'w', encoding='utf-8') as relations_text_f:
@@ -151,6 +164,11 @@ def create_dataset_files():
             clean_entity_label = entity_label.strip().replace('\r\n', '').replace("\t", "").replace("\n", "")
             entities_text_f.write(f'{entity_id}\t{clean_entity_label}{newline}')
             entities_f.write(f'{entity_id}{newline}')
+    # Split Into train/test/dev
+    X_train, X_test = train_test_split(triples, test_size=0.2, random_state=1)
+    X_train, X_val = train_test_split(X_train, test_size=0.25, random_state=1)
+    # Write train/test/dev to files
+
 
 
 if __name__ == '__main__':

@@ -6,6 +6,7 @@ from typing import List, Tuple
 from forbiddenfruit import curse
 from orkg import ORKG
 from sklearn.model_selection import train_test_split
+from .functions import convert_ids_to_dict as _convert_ids_to_dict
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -86,18 +87,6 @@ def create_ids_dict(data_dir):
     relations = _convert_ids_to_dict(data_dir, 'relation')
     entities = _convert_ids_to_dict(data_dir, 'entity')
     return relations, entities
-
-
-def _convert_ids_to_dict(data_dir: str, file_type: str):
-    result = {}
-    with open(os.path.join(data_dir, f"{file_type}2id.txt"), 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-        for index, line in enumerate(lines):
-            if index == 0 or len(line.strip()) == 0:
-                continue
-            parts = line.strip().split('\t')
-            result[parts[0]] = parts[1]
-    return result
 
 
 def write_orkg_relations():
