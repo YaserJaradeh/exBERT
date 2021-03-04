@@ -175,7 +175,7 @@ def create_dataset_files():
     write_stats(path, entities, relations, new_triples)
 
 
-def create_pwc_dataset(pages: int = 20):
+def create_pwc_dataset(pages: int = 50):
     fetch_evaluations(pages)
     fetch_datasets(pages)
     fetch_tasks(pages)

@@ -1,0 +1,19 @@
+18
+/relation/has-task	0
+/relation/has-dataset	1
+/relation/has-name	2
+/relation/has-url	3
+/relation/has-description	4
+/relation/has-full_name	5
+/relation/has-paper	6
+/relation/has-url_abs	7
+/relation/has-url_pdf	8
+/relation/has-title	9
+/relation/has-abstract	10
+/relation/has-authors	11
+/relation/has-published	12
+/relation/has-arxiv_id	13
+/relation/has-proceeding	14
+/relation/has-conference	15
+/relation/has-conference_url_abs	16
+/relation/has-conference_url_pdf	17
