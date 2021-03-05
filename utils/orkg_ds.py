@@ -135,7 +135,7 @@ def _get_n_statements_starting_from_x(n_statements: int, x_page: int = 1):
 
 def write_orkg_statements_new():
     log.info("Fetching statements from ORKG")
-    orkg_statements, new_page = _get_n_statements_starting_from_x(1000 * 1000)
+    orkg_statements, new_page = _get_n_statements_starting_from_x(1000 * 1000 * 2)
     orkg_statements = filter_out_unwanted_statements(orkg_statements)
     X_train, X_test = train_test_split(orkg_statements, test_size=0.2, random_state=1)
     X_train, X_val = train_test_split(X_train, test_size=0.25, random_state=1)
