@@ -1,15 +1,15 @@
 26
 /relation/has-task	0
 /relation/has-dataset	1
-/relation/has-best_rank	2
-/relation/has-metric	3
-/relation/has-value	4
-/relation/has-metrics	5
-/relation/has-methodology	6
-/relation/has-uses_additional_data	7
-/relation/has-paper	8
-/relation/has-best_metric	9
-/relation/has-evaluated_on	10
+/relation/has-metric	2
+/relation/has-value	3
+/relation/has-metrics	4
+/relation/has-methodology	5
+/relation/has-uses_additional_data	6
+/relation/has-paper	7
+/relation/has-evaluated_on	8
+/relation/has-best_rank	9
+/relation/has-best_metric	10
 /relation/has-name	11
 /relation/has-url	12
 /relation/has-description	13
