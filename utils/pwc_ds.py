@@ -201,10 +201,11 @@ def create_dataset_files():
             os.path.join(path, "entity2text.txt"), 'w', encoding='utf-8') as entities_text_f:
         entities_ids_f.write(f'{len(entities)}{newline}')
         for index, (entity_label, entity_id) in enumerate(entities.items()):
-            entities_ids_f.write(f'{entity_id}\t{index}{newline}')
             clean_entity_label = entity_label.strip().replace('\r\n', '').replace("\t", "").replace("\n", "")
-            entities_text_f.write(f'{entity_id}\t{clean_entity_label}{newline}')
-            entities_f.write(f'{entity_id}{newline}')
+            if len(clean_entity_label) > 0:
+                entities_ids_f.write(f'{entity_id}\t{index}{newline}')
+                entities_text_f.write(f'{entity_id}\t{clean_entity_label}{newline}')
+                entities_f.write(f'{entity_id}{newline}')
     # Pre-process triples
     new_triples = []
     for t in triples:
