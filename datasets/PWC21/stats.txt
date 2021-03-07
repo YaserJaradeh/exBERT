@@ -1,3 +1,3 @@
-entities	189984
+entities	192115
 relations	26
-triples	281320
+triples	284875
