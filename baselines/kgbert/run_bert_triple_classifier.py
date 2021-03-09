@@ -169,7 +169,7 @@ class KGProcessor(DataProcessor):
         """Creates examples for the training and dev sets."""
         # entity to text
         ent2text = {}
-        with open(os.path.join(data_dir, "entity2text.txt"), 'r') as f:
+        with open(os.path.join(data_dir, "entity2text.txt"), 'r', encoding='utf8') as f:
             ent_lines = f.readlines()
             for line in ent_lines:
                 temp = line.strip().split('\t')
@@ -179,7 +179,7 @@ class KGProcessor(DataProcessor):
         entities = list(ent2text.keys())
 
         rel2text = {}
-        with open(os.path.join(data_dir, "relation2text.txt"), 'r') as f:
+        with open(os.path.join(data_dir, "relation2text.txt"), 'r', encoding='utf8') as f:
             rel_lines = f.readlines()
             for line in rel_lines:
                 temp = line.strip().split('\t')
