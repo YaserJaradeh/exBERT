@@ -41,8 +41,8 @@ from pytorch_pretrained_bert.modeling import BertForSequenceClassification, Bert
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 
-os.environ['CUDA_VISIBLE_DEVICES']= '3'
-#torch.backends.cudnn.deterministic = True
+os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+# torch.backends.cudnn.deterministic = True
 
 logger = logging.getLogger(__name__)
 
@@ -106,12 +106,12 @@ class DataProcessor(object):
             return lines
 
 
-
 class KGProcessor(DataProcessor):
     """Processor for knowledge graph data set."""
+
     def __init__(self):
         self.labels = set()
-    
+
     def get_train_examples(self, data_dir):
         """See base class."""
         return self._create_examples(
@@ -123,9 +123,9 @@ class KGProcessor(DataProcessor):
             self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev", data_dir)
 
     def get_test_examples(self, data_dir):
-      """See base class."""
-      return self._create_examples(
-          self._read_tsv(os.path.join(data_dir, "test.tsv")), "test", data_dir)
+        """See base class."""
+        return self._create_examples(
+            self._read_tsv(os.path.join(data_dir, "test.tsv")), "test", data_dir)
 
     def get_relations(self, data_dir):
         """Gets all labels (relations) in the knowledge graph."""
@@ -174,8 +174,8 @@ class KGProcessor(DataProcessor):
                 ent_lines = f.readlines()
                 for line in ent_lines:
                     temp = line.strip().split('\t')
-                    #first_sent_end_position = temp[1].find(".")
-                    ent2text[temp[0]] = temp[1]#[:first_sent_end_position + 1]              
+                    # first_sent_end_position = temp[1].find(".")
+                    ent2text[temp[0]] = temp[1]  # [:first_sent_end_position + 1]
 
         examples = []
         for (i, line) in enumerate(lines):
@@ -188,10 +188,11 @@ class KGProcessor(DataProcessor):
                 InputExample(guid=guid, text_a=text_a, text_b=text_b, label=label))
         return examples
 
-def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer, print_info = True):
+
+def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer, print_info=True):
     """Loads a data file into a list of `InputBatch`s."""
 
-    label_map = {label : i for i, label in enumerate(label_list)}
+    label_map = {label: i for i, label in enumerate(label_list)}
 
     features = []
     for (ex_index, example) in enumerate(examples):
@@ -259,18 +260,18 @@ def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer
             logger.info("*** Example ***")
             logger.info("guid: %s" % (example.guid))
             logger.info("tokens: %s" % " ".join(
-                    [str(x) for x in tokens]))
+                [str(x) for x in tokens]))
             logger.info("input_ids: %s" % " ".join([str(x) for x in input_ids]))
             logger.info("input_mask: %s" % " ".join([str(x) for x in input_mask]))
             logger.info(
-                    "segment_ids: %s" % " ".join([str(x) for x in segment_ids]))
+                "segment_ids: %s" % " ".join([str(x) for x in segment_ids]))
             logger.info("label: %s (id = %d)" % (example.label, label_id))
 
         features.append(
-                InputFeatures(input_ids=input_ids,
-                              input_mask=input_mask,
-                              segment_ids=segment_ids,
-                              label_id=label_id))
+            InputFeatures(input_ids=input_ids,
+                          input_mask=input_mask,
+                          segment_ids=segment_ids,
+                          label_id=label_id))
     return features
 
 
@@ -294,6 +295,7 @@ def _truncate_seq_pair(tokens_a, tokens_b, max_length):
 def simple_accuracy(preds, labels):
     return (preds == labels).mean()
 
+
 def compute_metrics(task_name, preds, labels):
     assert len(preds) == len(labels)
     if task_name == "kg":
@@ -313,8 +315,8 @@ def main():
                         help="The input data dir. Should contain the .tsv files (or other data files) for the task.")
     parser.add_argument("--bert_model", default=None, type=str, required=True,
                         help="Bert pre-trained model selected in the list: bert-base-uncased, "
-                        "bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, "
-                        "bert-base-multilingual-cased, bert-base-chinese.")
+                             "bert-large-uncased, bert-base-cased, bert-large-cased, bert-base-multilingual-uncased, "
+                             "bert-base-multilingual-cased, bert-base-chinese.")
     parser.add_argument("--task_name",
                         default=None,
                         type=str,
@@ -418,16 +420,16 @@ def main():
         # Initializes the distributed backend which will take care of sychronizing nodes/GPUs
         torch.distributed.init_process_group(backend='nccl')
 
-    logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
-                        datefmt = '%m/%d/%Y %H:%M:%S',
-                        level = logging.INFO if args.local_rank in [-1, 0] else logging.WARN)
+    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
+                        datefmt='%m/%d/%Y %H:%M:%S',
+                        level=logging.INFO if args.local_rank in [-1, 0] else logging.WARN)
 
     logger.info("device: {} n_gpu: {}, distributed training: {}, 16-bits training: {}".format(
         device, n_gpu, bool(args.local_rank != -1), args.fp16))
 
     if args.gradient_accumulation_steps < 1:
         raise ValueError("Invalid gradient_accumulation_steps parameter: {}, should be >= 1".format(
-                            args.gradient_accumulation_steps))
+            args.gradient_accumulation_steps))
 
     args.train_batch_size = args.train_batch_size // args.gradient_accumulation_steps
     args.seed = random.randint(1, 200)
@@ -457,7 +459,7 @@ def main():
     num_labels = len(label_list)
 
     entity_list = processor.get_entities(args.data_dir)
-    #print(entity_list)
+    # print(entity_list)
 
     tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
 
@@ -471,10 +473,11 @@ def main():
             num_train_optimization_steps = num_train_optimization_steps // torch.distributed.get_world_size()
 
     # Prepare model
-    cache_dir = args.cache_dir if args.cache_dir else os.path.join(str(PYTORCH_PRETRAINED_BERT_CACHE), 'distributed_{}'.format(args.local_rank))
+    cache_dir = args.cache_dir if args.cache_dir else os.path.join(str(PYTORCH_PRETRAINED_BERT_CACHE),
+                                                                   'distributed_{}'.format(args.local_rank))
     model = BertForSequenceClassification.from_pretrained(args.bert_model,
-              cache_dir=cache_dir,
-              num_labels=num_labels)
+                                                          cache_dir=cache_dir,
+                                                          num_labels=num_labels)
     if args.fp16:
         model.half()
     model.to(device)
@@ -482,25 +485,27 @@ def main():
         try:
             from apex.parallel import DistributedDataParallel as DDP
         except ImportError:
-            raise ImportError("Please install apex from https://www.github.com/nvidia/apex to use distributed and fp16 training.")
+            raise ImportError(
+                "Please install apex from https://www.github.com/nvidia/apex to use distributed and fp16 training.")
 
         model = DDP(model)
     elif n_gpu > 1:
         model = torch.nn.DataParallel(model)
-        #model = torch.nn.parallel.data_parallel(model)
+        # model = torch.nn.parallel.data_parallel(model)
     # Prepare optimizer
     param_optimizer = list(model.named_parameters())
     no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
     optimizer_grouped_parameters = [
         {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)], 'weight_decay': 0.01},
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
-        ]
+    ]
     if args.fp16:
         try:
             from apex.optimizers import FP16_Optimizer
             from apex.optimizers import FusedAdam
         except ImportError:
-            raise ImportError("Please install apex from https://www.github.com/nvidia/apex to use distributed and fp16 training.")
+            raise ImportError(
+                "Please install apex from https://www.github.com/nvidia/apex to use distributed and fp16 training.")
 
         optimizer = FusedAdam(optimizer_grouped_parameters,
                               lr=args.learning_rate,
@@ -511,7 +516,7 @@ def main():
         else:
             optimizer = FP16_Optimizer(optimizer, static_loss_scale=args.loss_scale)
         warmup_linear = WarmupLinearSchedule(warmup=args.warmup_proportion,
-                                             t_total=num_train_optimization_steps)        
+                                             t_total=num_train_optimization_steps)
 
     else:
         optimizer = BertAdam(optimizer_grouped_parameters,
@@ -544,7 +549,7 @@ def main():
         train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=args.train_batch_size)
 
         model.train()
-        #print(model)
+        # print(model)
         for _ in trange(int(args.num_train_epochs), desc="Epoch"):
             tr_loss = 0
             nb_tr_examples, nb_tr_steps = 0, 0
@@ -554,13 +559,13 @@ def main():
 
                 # define a new function to compute loss values for both output_modes
                 logits = model(input_ids, segment_ids, input_mask, labels=None)
-                #print(logits, logits.shape)
+                # print(logits, logits.shape)
 
                 loss_fct = CrossEntropyLoss()
                 loss = loss_fct(logits.view(-1, num_labels), label_ids.view(-1))
 
                 if n_gpu > 1:
-                    loss = loss.mean() # mean() to average on multi-gpu.
+                    loss = loss.mean()  # mean() to average on multi-gpu.
                 if args.gradient_accumulation_steps > 1:
                     loss = loss / args.gradient_accumulation_steps
 
@@ -576,8 +581,9 @@ def main():
                     if args.fp16:
                         # modify learning rate with special warm up BERT uses
                         # if args.fp16 is False, BertAdam is used that handles this automatically
-                        lr_this_step = args.learning_rate * warmup_linear.get_lr(global_step/num_train_optimization_steps,
-                                                                                 args.warmup_proportion)
+                        lr_this_step = args.learning_rate * warmup_linear.get_lr(
+                            global_step / num_train_optimization_steps,
+                            args.warmup_proportion)
                         for param_group in optimizer.param_groups:
                             param_group['lr'] = lr_this_step
                     optimizer.step()
@@ -605,7 +611,7 @@ def main():
     model.to(device)
 
     if args.do_eval and (args.local_rank == -1 or torch.distributed.get_rank() == 0):
-        
+
         eval_examples = processor.get_dev_examples(args.data_dir)
         eval_features = convert_examples_to_features(
             eval_examples, label_list, args.max_seq_length, tokenizer)
@@ -622,7 +628,7 @@ def main():
         # Run prediction for full data
         eval_sampler = SequentialSampler(eval_data)
         eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=args.eval_batch_size)
-        
+
         # Load a trained model and vocabulary that you have fine-tuned
         model = BertForSequenceClassification.from_pretrained(args.output_dir, num_labels=num_labels)
         tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
@@ -646,8 +652,7 @@ def main():
             loss_fct = CrossEntropyLoss()
             tmp_eval_loss = loss_fct(logits.view(-1, num_labels), label_ids.view(-1))
             print(label_ids.view(-1))
-            
-            
+
             eval_loss += tmp_eval_loss.mean().item()
             nb_eval_steps += 1
             if len(preds) == 0:
@@ -661,7 +666,7 @@ def main():
 
         preds = np.argmax(preds, axis=1)
         result = compute_metrics(task_name, preds, all_label_ids.numpy())
-        loss = tr_loss/nb_tr_steps if args.do_train else None
+        loss = tr_loss / nb_tr_steps if args.do_train else None
 
         result['eval_loss'] = eval_loss
         result['global_step'] = global_step
@@ -722,7 +727,7 @@ def main():
 
             loss_fct = CrossEntropyLoss()
             tmp_eval_loss = loss_fct(logits.view(-1, num_labels), label_ids.view(-1))
-            
+
             eval_loss += tmp_eval_loss.mean().item()
             nb_eval_steps += 1
             if len(preds) == 0:
@@ -734,7 +739,7 @@ def main():
         eval_loss = eval_loss / nb_eval_steps
         preds = preds[0]
         print(preds, preds.shape)
-        
+
         all_label_ids = all_label_ids.numpy()
 
         ranks = []
@@ -749,16 +754,16 @@ def main():
             rel_values = torch.tensor(pred)
             _, argsort1 = torch.sort(rel_values, descending=True)
             argsort1 = argsort1.cpu().numpy()
-            
+
             rank = np.where(argsort1 == all_label_ids[i])[0][0]
-            #print(argsort1, all_label_ids[i], rank)
+            # print(argsort1, all_label_ids[i], rank)
             ranks.append(rank + 1)
             test_triple = test_triples[i]
             filter_rank = rank
             for tmp_label_id in argsort1[:rank]:
                 tmp_label = label_list[tmp_label_id]
                 tmp_triple = [test_triple[0], tmp_label, test_triple[2]]
-                #print(tmp_triple)
+                # print(tmp_triple)
                 tmp_triple_str = '\t'.join(tmp_triple)
                 if tmp_triple_str in all_triples_str_set:
                     filter_rank -= 1
@@ -773,17 +778,17 @@ def main():
                 if filter_rank <= hits_level:
                     hits_filter[hits_level].append(1.0)
                 else:
-                    hits_filter[hits_level].append(0.0)   
+                    hits_filter[hits_level].append(0.0)
 
         print("Raw mean rank: ", np.mean(ranks))
         print("Filtered mean rank: ", np.mean(filter_ranks))
-        for i in [0,2,9]:
-            print('Raw Hits @{0}: {1}'.format(i+1, np.mean(hits[i])))
-            print('hits_filter Hits @{0}: {1}'.format(i+1, np.mean(hits_filter[i])))
+        for i in [0, 2, 9]:
+            print('Raw Hits @{0}: {1}'.format(i + 1, np.mean(hits[i])))
+            print('hits_filter Hits @{0}: {1}'.format(i + 1, np.mean(hits_filter[i])))
         preds = np.argmax(preds, axis=1)
 
         result = compute_metrics(task_name, preds, all_label_ids)
-        loss = tr_loss/nb_tr_steps if args.do_train else None
+        loss = tr_loss / nb_tr_steps if args.do_train else None
 
         result['eval_loss'] = eval_loss
         result['global_step'] = global_step
@@ -798,6 +803,7 @@ def main():
         # relation prediction, raw
         print("Relation prediction hits@1, raw...")
         print(metrics.accuracy_score(all_label_ids, preds))
+
 
 if __name__ == "__main__":
     main()
