@@ -41,7 +41,7 @@ from pytorch_pretrained_bert.modeling import BertForSequenceClassification, Bert
 from pytorch_pretrained_bert.tokenization import BertTokenizer
 from pytorch_pretrained_bert.optimization import BertAdam, WarmupLinearSchedule
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '6'
+# os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # torch.backends.cudnn.deterministic = True
 
 logger = logging.getLogger(__name__)
@@ -195,19 +195,29 @@ class KGProcessor(DataProcessor):
             relation_text = rel2text[line[1]]
 
             if set_type == "dev" or set_type == "test":
-                triple_label = line[3]
-                if triple_label == "1":
-                    label = "1"
-                else:
-                    label = "0"
+                if len(line) > 3:
+                    triple_label = line[3]
+                    if triple_label == "1":
+                        label = "1"
+                    else:
+                        label = "0"
 
-                guid = "%s-%s" % (set_type, i)
-                text_a = head_ent_text
-                text_b = relation_text
-                text_c = tail_ent_text
-                self.labels.add(label)
-                examples.append(
-                    InputExample(guid=guid, text_a=text_a, text_b=text_b, text_c=text_c, label=label))
+                    guid = "%s-%s" % (set_type, i)
+                    text_a = head_ent_text
+                    text_b = relation_text
+                    text_c = tail_ent_text
+                    self.labels.add(label)
+                    examples.append(
+                        InputExample(guid=guid, text_a=text_a, text_b=text_b, text_c=text_c, label=label))
+                else:
+                    guid = "%s-%s" % (set_type, i)
+                    text_a = head_ent_text
+                    text_b = relation_text
+                    text_c = tail_ent_text
+                    examples.append(
+                        InputExample(guid=guid, text_a=text_a, text_b=text_b, text_c=text_c, label="1"))
+                    self.corrupt_head_tail(ent2text, entities, examples, i, line, lines_str_set, set_type, text_a,
+                                           text_b, text_c)
 
             elif set_type == "train":
                 guid = "%s-%s" % (set_type, i)
@@ -217,37 +227,42 @@ class KGProcessor(DataProcessor):
                 examples.append(
                     InputExample(guid=guid, text_a=text_a, text_b=text_b, text_c=text_c, label="1"))
 
-                rnd = random.random()
-                guid = "%s-%s" % (set_type + "_corrupt", i)
-                if rnd <= 0.5:
-                    # corrupting head
-                    tmp_head = ''
-                    while True:
-                        tmp_ent_list = set(entities)
-                        tmp_ent_list.remove(line[0])
-                        tmp_ent_list = list(tmp_ent_list)
-                        tmp_head = random.choice(tmp_ent_list)
-                        tmp_triple_str = tmp_head + '\t' + line[1] + '\t' + line[2]
-                        if tmp_triple_str not in lines_str_set:
-                            break
-                    tmp_head_text = ent2text[tmp_head]
-                    examples.append(
-                        InputExample(guid=guid, text_a=tmp_head_text, text_b=text_b, text_c=text_c, label="0"))
-                else:
-                    # corrupting tail
-                    tmp_tail = ''
-                    while True:
-                        tmp_ent_list = set(entities)
-                        tmp_ent_list.remove(line[2])
-                        tmp_ent_list = list(tmp_ent_list)
-                        tmp_tail = random.choice(tmp_ent_list)
-                        tmp_triple_str = line[0] + '\t' + line[1] + '\t' + tmp_tail
-                        if tmp_triple_str not in lines_str_set:
-                            break
-                    tmp_tail_text = ent2text[tmp_tail]
-                    examples.append(
-                        InputExample(guid=guid, text_a=text_a, text_b=text_b, text_c=tmp_tail_text, label="0"))
+                self.corrupt_head_tail(ent2text, entities, examples, i, line, lines_str_set, set_type, text_a, text_b,
+                                       text_c)
         return examples
+
+    @staticmethod
+    def corrupt_head_tail(ent2text, entities, examples, i, line, lines_str_set, set_type, text_a, text_b, text_c):
+        rnd = random.random()
+        guid = "%s-%s" % (set_type + "_corrupt", i)
+        if rnd <= 0.5:
+            # corrupting head
+            tmp_head = ''
+            while True:
+                tmp_ent_list = set(entities)
+                tmp_ent_list.remove(line[0])
+                tmp_ent_list = list(tmp_ent_list)
+                tmp_head = random.choice(tmp_ent_list)
+                tmp_triple_str = tmp_head + '\t' + line[1] + '\t' + line[2]
+                if tmp_triple_str not in lines_str_set:
+                    break
+            tmp_head_text = ent2text[tmp_head]
+            examples.append(
+                InputExample(guid=guid, text_a=tmp_head_text, text_b=text_b, text_c=text_c, label="0"))
+        else:
+            # corrupting tail
+            tmp_tail = ''
+            while True:
+                tmp_ent_list = set(entities)
+                tmp_ent_list.remove(line[2])
+                tmp_ent_list = list(tmp_ent_list)
+                tmp_tail = random.choice(tmp_ent_list)
+                tmp_triple_str = line[0] + '\t' + line[1] + '\t' + tmp_tail
+                if tmp_triple_str not in lines_str_set:
+                    break
+            tmp_tail_text = ent2text[tmp_tail]
+            examples.append(
+                InputExample(guid=guid, text_a=text_a, text_b=text_b, text_c=tmp_tail_text, label="0"))
 
 
 def convert_examples_to_features(examples, label_list, max_seq_length, tokenizer, print_info=True):
@@ -853,5 +868,19 @@ def main():
         print(metrics.accuracy_score(all_label_ids, preds))
 
 
+def check_gpu_usage():
+    # setting device on GPU if available, else CPU
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print('Using device:', device)
+    print()
+    # Additional Info when using cuda
+    if device.type == 'cuda':
+        print(torch.cuda.get_device_name(0))
+        print('Memory Usage:')
+        print('Allocated:', round(torch.cuda.memory_allocated(0) / 1024 ** 3, 1), 'GB')
+        print('Cached:   ', round(torch.cuda.memory_reserved(0) / 1024 ** 3, 1), 'GB')
+
+
 if __name__ == "__main__":
+    check_gpu_usage()
     main()
