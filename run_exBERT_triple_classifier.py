@@ -27,12 +27,11 @@ class CustomDataset(torch.utils.data.Dataset):
         return len(self.labels)
 
 
-class DataProcessor(object):
-    """Base class for data converters for sequence classification data sets."""
+class KGProcessor:
 
-    def get_labels(self, data_dir):
-        """Gets the list of labels for this data set."""
-        raise NotImplementedError()
+    def __init__(self, tokenizer: str):
+        self.labels = set()
+        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer)
 
     @classmethod
     def _read_tsv(cls, input_file, quotechar=None):
@@ -46,16 +45,8 @@ class DataProcessor(object):
                 lines.append(line)
             return lines
 
-
-class KGProcessor(DataProcessor):
-
-    def __init__(self, tokenizer: str):
-        self.labels = set()
-        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer)
-
     def get_relations(self, data_dir):
         """Gets all labels (relations) in the knowledge graph."""
-        # return list(self.labels)
         with open(os.path.join(data_dir, "relations.txt"), 'r') as f:
             lines = f.readlines()
             relations = []
@@ -320,9 +311,9 @@ def main():
     )
 
     trainer.train()
-    os.makedirs(args.cache_dir)
-    model.save_pretrained(args.cache_dir)
-    trainer.predict(test_ds)
+    model.save_pretrained(args.output_dir)
+    results = trainer.predict(test_ds)
+    print(results.metrics)
 
 
 if __name__ == "__main__":
