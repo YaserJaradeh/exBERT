@@ -33,9 +33,9 @@ class DataProcessor:
 
 class KGProcessor(DataProcessor):
 
-    def __init__(self, tokenizer: str):
+    def __init__(self, tokenizer: str, max_seq_length: int):
         self.labels = set()
-        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer)
+        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, max_seq_length=max_seq_length)
 
     def get_relations(self, data_dir) -> List[str]:
         """Gets all labels (relations) in the knowledge graph."""
@@ -158,6 +158,4 @@ class KGProcessor(DataProcessor):
                 texts += corrupt_texts
                 labels += corrupt_labels
         encodings = self.tokenizer(texts, truncation=True, padding=True)
-        ds = CustomDataset(encodings, labels)
-        # ds.set_format("torch", column=["input_ids"])
-        return ds
+        return CustomDataset(encodings, labels)

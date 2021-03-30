@@ -5,6 +5,7 @@ import os
 from transformers import BertForSequenceClassification, Trainer, TrainingArguments
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 from processors import KGProcessor
+from transformers.trainer_utils import IntervalStrategy
 
 logger = logging.getLogger(__name__)
 
@@ -136,7 +137,9 @@ def main():
             args.gradient_accumulation_steps))
 
     kg = KGProcessor(
-        args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model)
+        args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model,
+        args.max_seq_length
+    )
 
     training_args = TrainingArguments(
         output_dir=args.output_dir,  # output directory
@@ -154,8 +157,8 @@ def main():
         fp16=args.fp16,
         do_train=args.do_train,
         do_eval=args.do_eval,
-        do_predict=args.do_predict,
-        no_cuda=args.no_cuda
+        no_cuda=args.no_cuda,
+        save_strategy=IntervalStrategy.NO,
     )
 
     model = BertForSequenceClassification.from_pretrained(
