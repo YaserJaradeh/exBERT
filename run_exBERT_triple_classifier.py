@@ -25,6 +25,12 @@ def compute_metrics(pred):
     }
 
 
+def write_metrics(metrics: dict, output_dir: str):
+    with open(os.path.join(output_dir, 'results.txt'), 'w') as f:
+        for key, value in metrics.items():
+            f.write(f'{key}:\t\t{value}\n')
+
+
 def main():
     parser = argparse.ArgumentParser()
 
@@ -180,6 +186,7 @@ def main():
     if args.do_predict:
         results = trainer.predict(test_ds)
         print(results.metrics)
+        write_metrics(results.metrics, args.output_dir)
 
 
 if __name__ == "__main__":
