@@ -33,9 +33,12 @@ class DataProcessor:
 
 class KGProcessor(DataProcessor):
 
-    def __init__(self, tokenizer: str, max_seq_length: int):
+    def __init__(self, tokenizer: str, max_seq_length: int = None):
         self.labels = set()
-        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, max_seq_length=max_seq_length)
+        if max_seq_length is None:
+            self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer)
+        else:
+            self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, max_seq_length=max_seq_length)
 
     def get_relations(self, data_dir) -> List[str]:
         """Gets all labels (relations) in the knowledge graph."""
@@ -112,13 +115,13 @@ class KGProcessor(DataProcessor):
         dev_lines = self._read_tsv(os.path.join(data_dir, "dev.tsv"))
         test_lines = self._read_tsv(os.path.join(data_dir, "test.tsv"))
 
-        train_dataset = self.transform_portion_to_dataset(data_dir, train_lines)
-        dev_dataset = self.transform_portion_to_dataset(data_dir, dev_lines)
-        test_dataset = self.transform_portion_to_dataset(data_dir, test_lines)
+        train_dataset = self._transform_portion_to_dataset(data_dir, train_lines)
+        dev_dataset = self._transform_portion_to_dataset(data_dir, dev_lines)
+        test_dataset = self._transform_portion_to_dataset(data_dir, test_lines)
 
         return train_dataset, dev_dataset, test_dataset
 
-    def transform_portion_to_dataset(self, data_dir: str, lines: List) -> CustomDataset:
+    def _transform_portion_to_dataset(self, data_dir: str, lines: List) -> CustomDataset:
         ent2text = {}
         with open(os.path.join(data_dir, "entity2text.txt"), 'r', encoding='utf8') as f:
             ent_lines = f.readlines()
