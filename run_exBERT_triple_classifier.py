@@ -147,6 +147,8 @@ def main():
         args.max_seq_length
     )
 
+    logger.info("Initialized KG-Processor")
+
     training_args = TrainingArguments(
         output_dir=args.output_dir,  # output directory
         num_train_epochs=args.num_train_epochs,  # total number of training epochs
@@ -167,9 +169,13 @@ def main():
         save_strategy=IntervalStrategy.NO,
     )
 
+    logger.info("Created training args")
+
     model = BertForSequenceClassification.from_pretrained(
         args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model)
     train_ds, eval_ds, test_ds = kg.create_datasets(args.data_dir)
+
+    logger.info("Loaded model from disk or downloaded it")
 
     trainer = Trainer(
         model=model,  # the instantiated 🤗 Transformers model to be trained
@@ -179,13 +185,19 @@ def main():
         compute_metrics=compute_metrics  # evaluation dataset
     )
 
+    logger.info("Initialized trainer object")
+
     if args.do_train or args.do_eval:
+        logger.info("Training")
         trainer.train()
     if not (args.custom_model is not None and os.path.exists(args.custom_model)):
+        logger.info("Saving model to disk")
         trainer.save_model(args.output_dir)
     if args.do_predict:
+        logger.info("Predicting")
         results = trainer.predict(test_ds)
         print(results.metrics)
+        logger.info("Writing metrics to disk")
         write_metrics(results.metrics, args.output_dir)
 
 
