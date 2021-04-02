@@ -53,6 +53,10 @@ def main():
                         type=str,
                         help="The path to a trained model (custom PyTorch model)")
     # Other parameters
+    parser.add_argument("--dataset_cache",
+                        default="./",
+                        type=str,
+                        help="Caching directory for datasets pickle files")
     parser.add_argument("--cache_dir",
                         default="",
                         type=str,
@@ -145,6 +149,7 @@ def main():
     kg = KGProcessor(
         args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model,
         args.data_dir,
+        args.dataset_cache,
         args.max_seq_length
     )
 

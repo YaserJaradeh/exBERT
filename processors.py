@@ -50,9 +50,10 @@ class DataProcessor:
 
 class KGProcessor(DataProcessor):
 
-    def __init__(self, tokenizer: str, data_dir: str, max_seq_length: int = None):
+    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
         self.labels = set()
         self.max_seq_length = max_seq_length
+        self.caching_dir = caching_dir
         self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, use_fast=True)
         self._setup_internal_fields(data_dir)
 
@@ -154,9 +155,11 @@ class KGProcessor(DataProcessor):
         return train_dataset, dev_dataset, test_dataset
 
     def _transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
-        if load_from_pkl and os.path.exists(f'./texts-{ds_type}.pkl') and os.path.exists(f'./labels-{ds_type}.pkl'):
-            texts = deserialize_data(f'./texts-{ds_type}.pkl')
-            labels = deserialize_data(f'./labels-{ds_type}.pkl')
+        texts_path = os.path.join(self.caching_dir, f'texts-{ds_type}.pkl')
+        labels_path = os.path.join(self.caching_dir, f'labels-{ds_type}.pkl')
+        if load_from_pkl and os.path.exists(texts_path) and os.path.exists(labels_path):
+            texts = deserialize_data(texts_path)
+            labels = deserialize_data(labels_path)
         else:
             lines_str_set = set(['\t'.join(line) for line in lines])
             texts = []
@@ -184,8 +187,8 @@ class KGProcessor(DataProcessor):
                                                                            head_ent_text, relation_text, tail_ent_text)
                     texts += corrupt_texts
                     labels += corrupt_labels
-            serialize_data(texts, f'./texts-{ds_type}.pkl')
-            serialize_data(labels, f'./labels-{ds_type}.pkl')
+            serialize_data(texts, texts_path)
+            serialize_data(labels, labels_path)
         encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
         return CustomDataset(encodings, labels)
 
