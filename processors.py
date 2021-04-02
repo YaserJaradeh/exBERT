@@ -158,6 +158,7 @@ class KGProcessor(DataProcessor):
         texts_path = os.path.join(self.caching_dir, f'texts-{ds_type}.pkl')
         labels_path = os.path.join(self.caching_dir, f'labels-{ds_type}.pkl')
         if load_from_pkl and os.path.exists(texts_path) and os.path.exists(labels_path):
+            logger.info("Loading pickle files rather than creating them")
             texts = deserialize_data(texts_path)
             labels = deserialize_data(labels_path)
         else:
