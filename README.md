@@ -3,6 +3,23 @@
 A transformer-based model that performs multiple tasks on scholarly knowledge graphs.
 
 ## How to use exBERT
+
+In order to use exBERT you have two options.
+
+Via docker
+
+```bash
+$ docker run <some fancy image> # coming soon
+```
+
+Or alternatively you can setup the python code locally and run it with the shown commands.
+
+First you need to download all the required packages
+
+```bash
+$ pip install -r requirements.txt
+```
+
 To run the **KG-BERT** scripts, you need to run the following commands
 
 * To run on the PWC21 dataset
@@ -24,14 +41,14 @@ $ python3 run_exBERT_triple_classifier.py \
 ```
 
 ## Datasets
-- ORKG
-- PWC
-- MAG
-- UMLS
+- ORKG ✔
+- PWC ✔
+- MAG 😕
+- UMLS ❓
 
 ## Baselines
-- KG-embeddings
+- KG-embeddings 😕
   - TransE
   - TransH
   - ...
-- KG-BERT
+- KG-BERT ✔
