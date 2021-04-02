@@ -3,7 +3,25 @@
 A transformer-based model that performs multiple tasks on scholarly knowledge graphs.
 
 ## How to use exBERT
-Usage to be described here
+To run the **KG-BERT** scripts, you need to run the following commands
+
+* To run on the PWC21 dataset
+```bash
+$ python3 run_exBERT_triple_classifier.py \
+      --do_train \
+      --do_eval  \
+      --do_predict  \
+      --data_dir ./datasets/PWC21  \
+      --bert_model bert-base-uncased  \
+      --max_seq_length 300  \
+      --train_batch_size 32  \
+      --learning_rate 5e-5  \
+      --num_train_epochs 3.0  \
+      --output_dir ./output_PWC21/   \
+      --gradient_accumulation_steps 1  \
+      --eval_batch_size 512 \
+      --fp16
+```
 
 ## Datasets
 - ORKG
