@@ -2,27 +2,12 @@ import logging
 import torch
 import os
 from transformers import BertForSequenceClassification, Trainer, TrainingArguments
-from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+from metrics import tc_compute_metrics
 from processors import KGProcessor
 from transformers.trainer_utils import IntervalStrategy
 import cli
 
 logger = logging.getLogger(__name__)
-
-
-def compute_metrics(pred):
-    labels = pred.label_ids
-    preds = pred.predictions.argmax(-1)
-    precision, recall, f1, _ = precision_recall_fscore_support(labels, preds, average='binary')
-    simple_accuracy = (preds == labels).mean()
-    acc = accuracy_score(labels, preds)
-    return {
-        'accuracy': acc,
-        'f1': f1,
-        'precision': precision,
-        'recall': recall,
-        'simple_accuracy': simple_accuracy
-    }
 
 
 def write_metrics(metrics: dict, output_dir: str):
@@ -98,7 +83,7 @@ def main():
         args=training_args,  # training arguments, defined above
         train_dataset=train_ds,  # training dataset
         eval_dataset=eval_ds,  # evaluation dataset
-        compute_metrics=compute_metrics  # evaluation dataset
+        compute_metrics=tc_compute_metrics  # evaluation dataset
     )
 
     logger.info("Initialized trainer object")
