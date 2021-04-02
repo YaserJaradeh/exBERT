@@ -144,6 +144,7 @@ def main():
 
     kg = KGProcessor(
         args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model,
+        args.data_dir,
         args.max_seq_length
     )
 
@@ -173,9 +174,10 @@ def main():
 
     model = BertForSequenceClassification.from_pretrained(
         args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model)
-    train_ds, eval_ds, test_ds = kg.create_datasets(args.data_dir)
-
     logger.info("Loaded model from disk or downloaded it")
+
+    logger.info("Creating dataset objects")
+    train_ds, eval_ds, test_ds = kg.create_datasets_fast(args.data_dir)
 
     trainer = Trainer(
         model=model,  # the instantiated 🤗 Transformers model to be trained

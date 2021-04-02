@@ -5,6 +5,12 @@ import sys
 import csv
 import random
 from datasets import CustomDataset
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
+                    datefmt='%m/%d/%Y %H:%M:%S',
+                    level=logging.INFO)
 
 
 class DataProcessor:
@@ -33,12 +39,27 @@ class DataProcessor:
 
 class KGProcessor(DataProcessor):
 
-    def __init__(self, tokenizer: str, max_seq_length: int = None):
+    def __init__(self, tokenizer: str, data_dir: str, max_seq_length: int = None):
         self.labels = set()
-        if max_seq_length is None:
-            self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer)
-        else:
-            self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, max_seq_length=max_seq_length)
+        self.max_seq_length = max_seq_length
+        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, use_fast=True)
+        self._setup_internal_fields(data_dir)
+
+    def _setup_internal_fields(self, data_dir: str):
+        self.ent2text = {}
+        with open(os.path.join(data_dir, "entity2text.txt"), 'r', encoding='utf8') as f:
+            ent_lines = f.readlines()
+            for line in ent_lines:
+                temp = line.strip().split('\t')
+                if len(temp) == 2:
+                    self.ent2text[temp[0]] = temp[1]
+        self.entities = list(self.ent2text.keys())
+        self.rel2text = {}
+        with open(os.path.join(data_dir, "relation2text.txt"), 'r', encoding='utf8') as f:
+            rel_lines = f.readlines()
+            for line in rel_lines:
+                temp = line.strip().split('\t')
+                self.rel2text[temp[0]] = temp[1]
 
     def get_relations(self, data_dir) -> List[str]:
         """Gets all labels (relations) in the knowledge graph."""
@@ -115,30 +136,33 @@ class KGProcessor(DataProcessor):
         dev_lines = self._read_tsv(os.path.join(data_dir, "dev.tsv"))
         test_lines = self._read_tsv(os.path.join(data_dir, "test.tsv"))
 
-        train_dataset = self._transform_portion_to_dataset(data_dir, train_lines)
-        dev_dataset = self._transform_portion_to_dataset(data_dir, dev_lines)
-        test_dataset = self._transform_portion_to_dataset(data_dir, test_lines)
+        train_dataset = self._transform_portion_to_dataset_fast(train_lines)
+        dev_dataset = self._transform_portion_to_dataset_fast(dev_lines)
+        test_dataset = self._transform_portion_to_dataset_fast(test_lines)
 
         return train_dataset, dev_dataset, test_dataset
 
-    def _transform_portion_to_dataset(self, data_dir: str, lines: List) -> CustomDataset:
-        ent2text = {}
-        with open(os.path.join(data_dir, "entity2text.txt"), 'r', encoding='utf8') as f:
-            ent_lines = f.readlines()
-            for line in ent_lines:
-                temp = line.strip().split('\t')
-                if len(temp) == 2:
-                    ent2text[temp[0]] = temp[1]
-        entities = list(ent2text.keys())
-        rel2text = {}
-        with open(os.path.join(data_dir, "relation2text.txt"), 'r', encoding='utf8') as f:
-            rel_lines = f.readlines()
-            for line in rel_lines:
-                temp = line.strip().split('\t')
-                rel2text[temp[0]] = temp[1]
+    def create_datasets_fast(self, data_dir: str) -> Tuple[CustomDataset, CustomDataset, CustomDataset]:
+        import concurrent.futures
+        train_lines = self._read_tsv(os.path.join(data_dir, "train.tsv"))
+        dev_lines = self._read_tsv(os.path.join(data_dir, "dev.tsv"))
+        test_lines = self._read_tsv(os.path.join(data_dir, "test.tsv"))
+
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            train_future = executor.submit(self._transform_portion_to_dataset_fast, train_lines)
+            dev_future = executor.submit(self._transform_portion_to_dataset_fast, dev_lines)
+            test_future = executor.submit(self._transform_portion_to_dataset_fast, test_lines)
+        dev_dataset = dev_future.result()
+        test_dataset = test_future.result()
+        train_dataset = train_future.result()
+
+        return train_dataset, dev_dataset, test_dataset
+
+    def _transform_portion_to_dataset(self, lines: List) -> CustomDataset:
         lines_str_set = set(['\t'.join(line) for line in lines])
         texts = []
         labels = []
+        logger.info(f"Processing now #{len(lines)} lines")
         for (i, line) in enumerate(lines):
             with_labels = False
             if len(line) > 3:
@@ -148,17 +172,57 @@ class KGProcessor(DataProcessor):
                     label = 1
                 else:
                     label = 0
-            head_ent_text = ent2text[line[0]]
-            tail_ent_text = ent2text[line[2]]
-            relation_text = rel2text[line[1]]
+            head_ent_text = self.ent2text[line[0]]
+            tail_ent_text = self.ent2text[line[2]]
+            relation_text = self.rel2text[line[1]]
             texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
             if with_labels:
                 labels.append(label)
             else:
                 labels.append(1)
-                corrupt_texts, corrupt_labels = self.corrupt_head_tail(ent2text, entities, line, lines_str_set,
+                corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
+                                                                       lines_str_set,
                                                                        head_ent_text, relation_text, tail_ent_text)
                 texts += corrupt_texts
                 labels += corrupt_labels
-        encodings = self.tokenizer(texts, truncation=True, padding=True)
+        encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
         return CustomDataset(encodings, labels)
+
+    def _transform_portion_to_dataset_fast(self, lines: List) -> CustomDataset:
+        from multiprocessing.pool import ThreadPool
+        from functools import partial
+        pool = ThreadPool(processes=4)
+        lines_str_set = set(['\t'.join(line) for line in lines])
+        logger.info(f"Processing now #{len(lines)} lines")
+        results = pool.map(partial(self.convert_triple_to_text, lines_str_set=lines_str_set), lines)
+        pool.join()
+        labels = [result[0][0] for result in results]
+        texts = [result[1][0] for result in results]
+        encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
+        return CustomDataset(encodings, labels)
+
+    def convert_triple_to_text(self, line, lines_str_set):
+        labels = []
+        texts = []
+        with_labels = False
+        if len(line) > 3:
+            triple_label = line[3]
+            with_labels = True
+            if triple_label == "1":
+                label = 1
+            else:
+                label = 0
+        head_ent_text = self.ent2text[line[0]]
+        tail_ent_text = self.ent2text[line[2]]
+        relation_text = self.rel2text[line[1]]
+        texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
+        if with_labels:
+            labels.append(label)
+        else:
+            labels.append(1)
+            corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
+                                                                   lines_str_set,
+                                                                   head_ent_text, relation_text, tail_ent_text)
+            texts += corrupt_texts
+            labels += corrupt_labels
+        return labels, texts
