@@ -177,7 +177,7 @@ def main():
     logger.info("Loaded model from disk or downloaded it")
 
     logger.info("Creating dataset objects")
-    train_ds, eval_ds, test_ds = kg.create_datasets_fast(args.data_dir)
+    train_ds, eval_ds, test_ds = kg.create_datasets(args.data_dir)
 
     trainer = Trainer(
         model=model,  # the instantiated 🤗 Transformers model to be trained
