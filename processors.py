@@ -14,10 +14,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
                     level=logging.INFO)
 
 
-def serialize_data(data: Any, path: str, file_name: str = None) -> str:
-    full_path = os.path.join(path, file_name)
-    pickle.dump(data, open(full_path, "wb"))
-    return full_path
+def serialize_data(data: Any, path: str):
+    pickle.dump(data, open(path, "wb"))
 
 
 def deserialize_data(path: str):
