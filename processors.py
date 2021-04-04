@@ -1,5 +1,5 @@
 from typing import Tuple, List, Any
-from transformers import BertTokenizerFast
+from transformers import AutoTokenizer
 import os
 import sys
 import csv
@@ -52,7 +52,7 @@ class KGProcessor(DataProcessor):
         self.labels = set()
         self.max_seq_length = max_seq_length
         self.caching_dir = caching_dir
-        self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, use_fast=True)
+        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer, use_fast=True)
         self._setup_internal_fields(data_dir)
 
     def _setup_internal_fields(self, data_dir: str):

@@ -1,7 +1,7 @@
 import logging
 import torch
 import os
-from transformers import BertForSequenceClassification, Trainer, TrainingArguments
+from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 from metrics import tc_compute_metrics
 from processors import KGProcessor
 from transformers.trainer_utils import IntervalStrategy
@@ -71,7 +71,7 @@ def main():
 
     logger.info("Created training args")
 
-    model = BertForSequenceClassification.from_pretrained(
+    model = AutoModelForSequenceClassification.from_pretrained(
         args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model)
     logger.info("Loaded model from disk or downloaded it")
 
