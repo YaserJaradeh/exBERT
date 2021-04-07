@@ -1,10 +1,25 @@
-from typing import Tuple, List
-from transformers import BertTokenizerFast
+from typing import Tuple, List, Any
+from transformers import AutoTokenizer
 import os
 import sys
 import csv
 import random
 from datasets import CustomDataset
+import logging
+import pickle
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
+                    datefmt='%m/%d/%Y %H:%M:%S',
+                    level=logging.INFO)
+
+
+def serialize_data(data: Any, path: str):
+    pickle.dump(data, open(path, "wb"))
+
+
+def deserialize_data(path: str):
+    return pickle.load(open(path, "rb"))
 
 
 class DataProcessor:
@@ -33,12 +48,28 @@ class DataProcessor:
 
 class KGProcessor(DataProcessor):
 
-    def __init__(self, tokenizer: str, max_seq_length: int = None):
+    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
         self.labels = set()
-        if max_seq_length is None:
-            self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer)
-        else:
-            self.tokenizer = BertTokenizerFast.from_pretrained(tokenizer, max_seq_length=max_seq_length)
+        self.max_seq_length = max_seq_length
+        self.caching_dir = caching_dir
+        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer, use_fast=True)
+        self._setup_internal_fields(data_dir)
+
+    def _setup_internal_fields(self, data_dir: str):
+        self.ent2text = {}
+        with open(os.path.join(data_dir, "entity2text.txt"), 'r', encoding='utf8') as f:
+            ent_lines = f.readlines()
+            for line in ent_lines:
+                temp = line.strip().split('\t')
+                if len(temp) == 2:
+                    self.ent2text[temp[0]] = temp[1]
+        self.entities = list(self.ent2text.keys())
+        self.rel2text = {}
+        with open(os.path.join(data_dir, "relation2text.txt"), 'r', encoding='utf8') as f:
+            rel_lines = f.readlines()
+            for line in rel_lines:
+                temp = line.strip().split('\t')
+                self.rel2text[temp[0]] = temp[1]
 
     def get_relations(self, data_dir) -> List[str]:
         """Gets all labels (relations) in the knowledge graph."""
@@ -115,50 +146,73 @@ class KGProcessor(DataProcessor):
         dev_lines = self._read_tsv(os.path.join(data_dir, "dev.tsv"))
         test_lines = self._read_tsv(os.path.join(data_dir, "test.tsv"))
 
-        train_dataset = self._transform_portion_to_dataset(data_dir, train_lines)
-        dev_dataset = self._transform_portion_to_dataset(data_dir, dev_lines)
-        test_dataset = self._transform_portion_to_dataset(data_dir, test_lines)
+        dev_dataset = self._transform_portion_to_dataset(dev_lines, 'dev')
+        test_dataset = self._transform_portion_to_dataset(test_lines, 'test')
+        train_dataset = self._transform_portion_to_dataset(train_lines, 'train')
 
         return train_dataset, dev_dataset, test_dataset
 
-    def _transform_portion_to_dataset(self, data_dir: str, lines: List) -> CustomDataset:
-        ent2text = {}
-        with open(os.path.join(data_dir, "entity2text.txt"), 'r', encoding='utf8') as f:
-            ent_lines = f.readlines()
-            for line in ent_lines:
-                temp = line.strip().split('\t')
-                if len(temp) == 2:
-                    ent2text[temp[0]] = temp[1]
-        entities = list(ent2text.keys())
-        rel2text = {}
-        with open(os.path.join(data_dir, "relation2text.txt"), 'r', encoding='utf8') as f:
-            rel_lines = f.readlines()
-            for line in rel_lines:
-                temp = line.strip().split('\t')
-                rel2text[temp[0]] = temp[1]
-        lines_str_set = set(['\t'.join(line) for line in lines])
-        texts = []
-        labels = []
-        for (i, line) in enumerate(lines):
-            with_labels = False
-            if len(line) > 3:
-                triple_label = line[3]
-                with_labels = True
-                if triple_label == "1":
-                    label = 1
+    def _transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
+        texts_path = os.path.join(self.caching_dir, f'texts-{ds_type}.pkl')
+        labels_path = os.path.join(self.caching_dir, f'labels-{ds_type}.pkl')
+        if load_from_pkl and os.path.exists(texts_path) and os.path.exists(labels_path):
+            logger.info("Loading pickle files rather than creating them")
+            texts = deserialize_data(texts_path)
+            labels = deserialize_data(labels_path)
+        else:
+            lines_str_set = set(['\t'.join(line) for line in lines])
+            texts = []
+            labels = []
+            logger.info(f"Processing now #{len(lines)} lines")
+            for (i, line) in enumerate(lines):
+                with_labels = False
+                if len(line) > 3:
+                    triple_label = line[3]
+                    with_labels = True
+                    if triple_label == "1":
+                        label = 1
+                    else:
+                        label = 0
+                head_ent_text = self.ent2text[line[0]]
+                tail_ent_text = self.ent2text[line[2]]
+                relation_text = self.rel2text[line[1]]
+                texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
+                if with_labels:
+                    labels.append(label)
                 else:
-                    label = 0
-            head_ent_text = ent2text[line[0]]
-            tail_ent_text = ent2text[line[2]]
-            relation_text = rel2text[line[1]]
-            texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
-            if with_labels:
-                labels.append(label)
-            else:
-                labels.append(1)
-                corrupt_texts, corrupt_labels = self.corrupt_head_tail(ent2text, entities, line, lines_str_set,
-                                                                       head_ent_text, relation_text, tail_ent_text)
-                texts += corrupt_texts
-                labels += corrupt_labels
-        encodings = self.tokenizer(texts, truncation=True, padding=True)
+                    labels.append(1)
+                    corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
+                                                                           lines_str_set,
+                                                                           head_ent_text, relation_text, tail_ent_text)
+                    texts += corrupt_texts
+                    labels += corrupt_labels
+            serialize_data(texts, texts_path)
+            serialize_data(labels, labels_path)
+        encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
         return CustomDataset(encodings, labels)
+
+    def convert_triple_to_text(self, line, lines_str_set):
+        labels = []
+        texts = []
+        with_labels = False
+        if len(line) > 3:
+            triple_label = line[3]
+            with_labels = True
+            if triple_label == "1":
+                label = 1
+            else:
+                label = 0
+        head_ent_text = self.ent2text[line[0]]
+        tail_ent_text = self.ent2text[line[2]]
+        relation_text = self.rel2text[line[1]]
+        texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
+        if with_labels:
+            labels.append(label)
+        else:
+            labels.append(1)
+            corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
+                                                                   lines_str_set,
+                                                                   head_ent_text, relation_text, tail_ent_text)
+            texts += corrupt_texts
+            labels += corrupt_labels
+        return labels, texts
