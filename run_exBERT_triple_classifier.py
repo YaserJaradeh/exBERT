@@ -83,7 +83,7 @@ def main():
         args=training_args,  # training arguments, defined above
         train_dataset=train_ds,  # training dataset
         eval_dataset=eval_ds,  # evaluation dataset
-        compute_metrics=tc_compute_metrics  # evaluation dataset
+        compute_metrics=tc_compute_metrics
     )
 
     logger.info("Initialized trainer object")
