@@ -3,7 +3,7 @@ import torch
 import os
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
 from metrics import tc_compute_metrics
-from processors import KGProcessor
+from processors import HeadTailPredictionProcessor, RelationPredictionProcessor, TripleClassificationProcessor
 from transformers.trainer_utils import IntervalStrategy
 import cli
 
@@ -17,6 +17,8 @@ def write_metrics(metrics: dict, output_dir: str):
 
 
 def pre_flight_checks(args):
+    if args.task.lower() not in ['tc', 'rp', 'htp']:
+        raise ValueError('task should be on the defined values. Check help for more details')
     if args.local_rank == -1 or args.no_cuda:
         device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
         n_gpu = torch.cuda.device_count()
@@ -40,7 +42,14 @@ def main():
     args = cli.init_cli()
     pre_flight_checks(args)
 
-    kg = KGProcessor(
+    if args.task.lower().strip() == 'tc':
+        processor_class = TripleClassificationProcessor
+    elif args.task.lower().strip() == 'rp':
+        processor_class = RelationPredictionProcessor
+    else:
+        processor_class = HeadTailPredictionProcessor
+
+    kg = processor_class(
         args.custom_model if args.custom_model is not None and os.path.exists(args.custom_model) else args.bert_model,
         args.data_dir,
         args.dataset_cache,
@@ -83,7 +92,7 @@ def main():
         args=training_args,  # training arguments, defined above
         train_dataset=train_ds,  # training dataset
         eval_dataset=eval_ds,  # evaluation dataset
-        compute_metrics=tc_compute_metrics
+        compute_metrics=kg.which_metrics()
     )
 
     logger.info("Initialized trainer object")

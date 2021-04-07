@@ -1,4 +1,4 @@
-from typing import Tuple, List, Any
+from typing import Tuple, List, Any, Union
 from transformers import AutoTokenizer
 import os
 import sys
@@ -7,6 +7,7 @@ import random
 from datasets import CustomDataset
 import logging
 import pickle
+import metrics
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
@@ -24,13 +25,16 @@ def deserialize_data(path: str):
 
 class DataProcessor:
 
-    def get_relations(self, data_dir) -> List[str]:
+    def get_relations(self) -> List[str]:
         pass
 
     def get_labels(self) -> List[str]:
         pass
 
-    def get_entities(self, data_dir) -> List[str]:
+    def get_entities(self) -> List[str]:
+        pass
+
+    def which_metrics(self):
         pass
 
     @classmethod
@@ -48,12 +52,13 @@ class DataProcessor:
 
 class KGProcessor(DataProcessor):
 
-    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
+    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length):
         self.labels = set()
         self.max_seq_length = max_seq_length
         self.caching_dir = caching_dir
         self.tokenizer = AutoTokenizer.from_pretrained(tokenizer, use_fast=True)
         self._setup_internal_fields(data_dir)
+        self.data_dir = data_dir
 
     def _setup_internal_fields(self, data_dir: str):
         self.ent2text = {}
@@ -71,9 +76,12 @@ class KGProcessor(DataProcessor):
                 temp = line.strip().split('\t')
                 self.rel2text[temp[0]] = temp[1]
 
-    def get_relations(self, data_dir) -> List[str]:
+    def _formulate_string_from_triple(self, text_a: str, text_b: str, text_c: Union[str, None]) -> str:
+        pass
+
+    def get_relations(self) -> List[str]:
         """Gets all labels (relations) in the knowledge graph."""
-        with open(os.path.join(data_dir, "relations.txt"), 'r') as f:
+        with open(os.path.join(self.data_dir, "relations.txt"), 'r') as f:
             lines = f.readlines()
             relations = []
             for line in lines:
@@ -84,30 +92,29 @@ class KGProcessor(DataProcessor):
         """Gets all labels (0, 1) for triples in the knowledge graph."""
         return ["0", "1"]
 
-    def get_entities(self, data_dir) -> List[str]:
+    def get_entities(self) -> List[str]:
         """Gets all entities in the knowledge graph."""
         # return list(self.labels)
-        with open(os.path.join(data_dir, "entities.txt"), 'r') as f:
+        with open(os.path.join(self.data_dir, "entities.txt"), 'r') as f:
             lines = f.readlines()
             entities = []
             for line in lines:
                 entities.append(line.strip())
         return entities
 
-    def get_train_triples(self, data_dir):
+    def get_train_triples(self):
         """Gets training triples."""
-        return self._read_tsv(os.path.join(data_dir, "train.tsv"))
+        return self._read_tsv(os.path.join(self.data_dir, "train.tsv"))
 
-    def get_dev_triples(self, data_dir):
+    def get_dev_triples(self):
         """Gets validation triples."""
-        return self._read_tsv(os.path.join(data_dir, "dev.tsv"))
+        return self._read_tsv(os.path.join(self.data_dir, "dev.tsv"))
 
-    def get_test_triples(self, data_dir):
+    def get_test_triples(self):
         """Gets test triples."""
-        return self._read_tsv(os.path.join(data_dir, "test.tsv"))
+        return self._read_tsv(os.path.join(self.data_dir, "test.tsv"))
 
-    @staticmethod
-    def corrupt_head_tail(ent2text, entities, line, lines_str_set, text_a, text_b, text_c):
+    def corrupt_head_tail(self, ent2text, entities, line, lines_str_set, text_a, text_b, text_c):
         rnd = random.random()
         texts = []
         labels = []
@@ -123,7 +130,7 @@ class KGProcessor(DataProcessor):
                 if tmp_triple_str not in lines_str_set:
                     break
             tmp_head_text = ent2text[tmp_head]
-            texts.append(f"[CLS] {tmp_head_text} [SEP] {text_b} [SEP] {text_c} [SEP]")
+            texts.append(self._formulate_string_from_triple(tmp_head_text, text_b, text_c))
             labels.append(0)
         else:
             # corrupting tail
@@ -137,7 +144,7 @@ class KGProcessor(DataProcessor):
                 if tmp_triple_str not in lines_str_set:
                     break
             tmp_tail_text = ent2text[tmp_tail]
-            texts.append(f"[CLS] {text_a} [SEP] {text_b} [SEP] {tmp_tail_text} [SEP]")
+            texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
             labels.append(0)
         return texts, labels
 
@@ -146,11 +153,14 @@ class KGProcessor(DataProcessor):
         dev_lines = self._read_tsv(os.path.join(data_dir, "dev.tsv"))
         test_lines = self._read_tsv(os.path.join(data_dir, "test.tsv"))
 
-        dev_dataset = self._transform_portion_to_dataset(dev_lines, 'dev')
-        test_dataset = self._transform_portion_to_dataset(test_lines, 'test')
-        train_dataset = self._transform_portion_to_dataset(train_lines, 'train')
+        dev_dataset = self.transform_portion_to_dataset(dev_lines, 'dev')
+        test_dataset = self.transform_portion_to_dataset(test_lines, 'test')
+        train_dataset = self.transform_portion_to_dataset(train_lines, 'train')
 
         return train_dataset, dev_dataset, test_dataset
+
+    def transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
+        return self._transform_portion_to_dataset(lines, ds_type, load_from_pkl)
 
     def _transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
         texts_path = os.path.join(self.caching_dir, f'texts-{ds_type}.pkl')
@@ -164,32 +174,15 @@ class KGProcessor(DataProcessor):
             texts = []
             labels = []
             logger.info(f"Processing now #{len(lines)} lines")
-            for (i, line) in enumerate(lines):
-                with_labels = False
-                if len(line) > 3:
-                    triple_label = line[3]
-                    with_labels = True
-                    if triple_label == "1":
-                        label = 1
-                    else:
-                        label = 0
-                head_ent_text = self.ent2text[line[0]]
-                tail_ent_text = self.ent2text[line[2]]
-                relation_text = self.rel2text[line[1]]
-                texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
-                if with_labels:
-                    labels.append(label)
-                else:
-                    labels.append(1)
-                    corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
-                                                                           lines_str_set,
-                                                                           head_ent_text, relation_text, tail_ent_text)
-                    texts += corrupt_texts
-                    labels += corrupt_labels
+            labels, texts = self.process_lines_into_strings(labels, lines, lines_str_set, texts)
             serialize_data(texts, texts_path)
             serialize_data(labels, labels_path)
         encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
         return CustomDataset(encodings, labels)
+
+    def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
+        # See child classes for concert definitions
+        pass
 
     def convert_triple_to_text(self, line, lines_str_set):
         labels = []
@@ -205,7 +198,7 @@ class KGProcessor(DataProcessor):
         head_ent_text = self.ent2text[line[0]]
         tail_ent_text = self.ent2text[line[2]]
         relation_text = self.rel2text[line[1]]
-        texts.append(f"[CLS] {head_ent_text} [SEP] {relation_text} [SEP] {tail_ent_text} [SEP]")
+        texts.append(self._formulate_string_from_triple(head_ent_text, relation_text, tail_ent_text))
         if with_labels:
             labels.append(label)
         else:
@@ -216,3 +209,120 @@ class KGProcessor(DataProcessor):
             texts += corrupt_texts
             labels += corrupt_labels
         return labels, texts
+
+
+class TripleClassificationProcessor(KGProcessor):
+
+    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
+        super().__init__(tokenizer, data_dir, caching_dir, max_seq_length)
+
+    def _formulate_string_from_triple(self, text_a: str, text_b: str, text_c: Union[str, None]) -> str:
+        return f"[CLS] {text_a} [SEP] {text_b} [SEP] {text_c} [SEP]"
+
+    def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
+        for (i, line) in enumerate(lines):
+            with_labels = False
+            if len(line) > 3:
+                triple_label = line[3]
+                with_labels = True
+                if triple_label == "1":
+                    label = 1
+                else:
+                    label = 0
+            head_ent_text = self.ent2text[line[0]]
+            tail_ent_text = self.ent2text[line[2]]
+            relation_text = self.rel2text[line[1]]
+            texts.append(self._formulate_string_from_triple(head_ent_text, relation_text, tail_ent_text))
+            if with_labels:
+                labels.append(label)
+            else:
+                labels.append(1)
+                corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
+                                                                       lines_str_set,
+                                                                       head_ent_text, relation_text, tail_ent_text)
+                texts += corrupt_texts
+                labels += corrupt_labels
+        return labels, texts
+
+    def which_metrics(self):
+        return metrics.tc_compute_metrics
+
+
+class RelationPredictionProcessor(KGProcessor):
+
+    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
+        super().__init__(tokenizer, data_dir, caching_dir, max_seq_length)
+
+    def _formulate_string_from_triple(self, text_a: str, text_b: str, text_c: Union[str, None]) -> str:
+        return f"[CLS] {text_a} [SEP] {text_b} [SEP]"
+
+    def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
+
+        label_map = {label: i for i, label in enumerate(self.get_relations())}
+
+        for (i, line) in enumerate(lines):
+            head_ent_text = self.ent2text[line[0]]
+            tail_ent_text = self.ent2text[line[2]]
+            label = line[1]
+            label_id = label_map[label]
+            labels.append(label_id)
+
+            texts.append(self._formulate_string_from_triple(head_ent_text, tail_ent_text, None))
+
+        return labels, texts
+
+    def which_metrics(self):
+        global all_triples_str_set
+        global test_triples
+        global label_list
+        train_triples = self.get_train_triples()
+        dev_triples = self.get_dev_triples()
+        test_triples = self.get_test_triples()
+        all_triples = train_triples + dev_triples + test_triples
+
+        all_triples_str_set = set()
+        for triple in all_triples:
+            triple_str = '\t'.join(triple)
+            all_triples_str_set.add(triple_str)
+        label_list = self.get_relations()
+
+        return metrics.rp_compute_metrics
+
+
+class HeadTailPredictionProcessor(KGProcessor):
+
+    def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
+        super().__init__(tokenizer, data_dir, caching_dir, max_seq_length)
+        self.is_training = False
+
+    def _formulate_string_from_triple(self, text_a: str, text_b: str, text_c: Union[str, None]) -> str:
+        return f"[CLS] {text_a} [SEP] {text_b} [SEP] {text_c} [SEP]"
+
+    def transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
+        if ds_type == 'train':
+            self.is_training = True
+        return self._transform_portion_to_dataset(lines, ds_type, load_from_pkl)
+
+    def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
+        for (i, line) in enumerate(lines):
+            head_ent_text = self.ent2text[line[0]]
+            tail_ent_text = self.ent2text[line[2]]
+            relation_text = self.rel2text[line[1]]
+
+            label = 1
+            labels.append(label)
+
+            texts.append(self._formulate_string_from_triple(head_ent_text, relation_text, tail_ent_text))
+
+            if self.is_training:
+                self.is_training = False
+                corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
+                                                                       lines_str_set,
+                                                                       head_ent_text, relation_text, tail_ent_text)
+                texts += corrupt_texts
+                labels += corrupt_labels
+        return labels, texts
+
+    def which_metrics(self):
+        return metrics.htp_compute_metrics
+

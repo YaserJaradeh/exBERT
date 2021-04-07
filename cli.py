@@ -11,6 +11,8 @@ def init_cli():
                         help="The input data dir. Should contain the .tsv files (or other data files) for the task.")
     parser.add_argument("--bert_model", default=None, type=str, required=True,
                         help="Bert pre-trained model (check HF for details)")
+    parser.add_argument("--task", default=None, type=str, required=True,
+                        help="The task you want to perform. It has to be TC or RP or HTP")
     parser.add_argument("--output_dir",
                         default=None,
                         type=str,
