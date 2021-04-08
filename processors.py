@@ -315,12 +315,12 @@ class HeadTailPredictionProcessor(KGProcessor):
             texts.append(self._formulate_string_from_triple(head_ent_text, relation_text, tail_ent_text))
 
             if self.is_training:
-                self.is_training = False
                 corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
                                                                        lines_str_set,
                                                                        head_ent_text, relation_text, tail_ent_text)
                 texts += corrupt_texts
                 labels += corrupt_labels
+        self.is_training = False
         return labels, texts
 
     def which_metrics(self):
