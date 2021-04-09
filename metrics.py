@@ -103,10 +103,10 @@ def htp_compute_metrics(pred):
         'simple_accuracy': simple_accuracy,
     }
 
-    # preds = preds[0]
+    preds = pred.predictions
     # get the dimension corresponding to current label 1
-    # rel_values = preds[:, labels[0]]
-    rel_values = torch.tensor(preds)
+    rel_values = preds[:, torch.tensor(labels[0])]
+    rel_values = torch.tensor(rel_values)
     _, argsort1 = torch.sort(rel_values, descending=True)
     argsort1 = argsort1.cpu().numpy()
     rank1 = np.where(argsort1 == 0)[0][0]

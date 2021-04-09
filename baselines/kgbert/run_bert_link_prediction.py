@@ -627,6 +627,7 @@ def main():
     global_step = 0
     nb_tr_steps = 0
     tr_loss = 0
+    tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
     if args.do_train:
 
         train_features = convert_examples_to_features(
@@ -705,7 +706,7 @@ def main():
 
         # Load a trained model and vocabulary that you have fine-tuned
         model = BertForSequenceClassification.from_pretrained(args.output_dir, num_labels=num_labels)
-        tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
+        # tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
     else:
         model = BertForSequenceClassification.from_pretrained(args.bert_model, num_labels=num_labels)
     model.to(device)
@@ -731,7 +732,7 @@ def main():
 
         # Load a trained model and vocabulary that you have fine-tuned
         model = BertForSequenceClassification.from_pretrained(args.output_dir, num_labels=num_labels)
-        tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
+        # tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
         model.to(device)
 
         model.eval()
@@ -779,6 +780,7 @@ def main():
                 logger.info("  %s = %s", key, str(result[key]))
                 writer.write("%s = %s\n" % (key, str(result[key])))
 
+    tokenizer = BertTokenizer.from_pretrained(args.bert_model, do_lower_case=args.do_lower_case)
     if args.do_predict and (args.local_rank == -1 or torch.distributed.get_rank() == 0):
 
         train_triples = processor.get_train_triples(args.data_dir)
@@ -809,7 +811,7 @@ def main():
         eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=args.eval_batch_size)
         # Load a trained model and vocabulary that you have fine-tuned
         model = BertForSequenceClassification.from_pretrained(args.output_dir, num_labels=num_labels)
-        tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
+        # tokenizer = BertTokenizer.from_pretrained(args.output_dir, do_lower_case=args.do_lower_case)
         model.to(device)
         model.eval()
         eval_loss = 0

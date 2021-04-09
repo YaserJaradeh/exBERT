@@ -100,7 +100,7 @@ def main():
     if args.do_train or args.do_eval:
         logger.info("Training")
         trainer.train()
-    if not (args.custom_model is not None and os.path.exists(args.custom_model)):
+    if not (args.custom_model is None):
         logger.info("Saving model to disk")
         trainer.save_model(args.output_dir)
     if args.do_predict:
