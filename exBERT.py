@@ -2,7 +2,6 @@ import logging
 import torch
 import os
 from transformers import AutoModelForSequenceClassification, Trainer, TrainingArguments
-from metrics import tc_compute_metrics
 from processors import HeadTailPredictionProcessor, RelationPredictionProcessor, TripleClassificationProcessor
 from transformers.trainer_utils import IntervalStrategy
 import cli
@@ -100,7 +99,7 @@ def main():
     if args.do_train or args.do_eval:
         logger.info("Training")
         trainer.train()
-    if not (args.custom_model is None):
+    if not (args.custom_model is not None and os.path.exists(args.custom_model)):
         logger.info("Saving model to disk")
         trainer.save_model(args.output_dir)
     if args.do_predict:

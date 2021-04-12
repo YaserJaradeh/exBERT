@@ -8,6 +8,7 @@ from datasets import CustomDataset
 import logging
 import pickle
 import metrics
+from tqdm import tqdm
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
@@ -120,7 +121,6 @@ class KGProcessor(DataProcessor):
         labels = []
         if rnd <= 0.5:
             # corrupting head
-            tmp_head = ''
             while True:
                 tmp_ent_list = set(entities)
                 tmp_ent_list.remove(line[0])
@@ -134,7 +134,6 @@ class KGProcessor(DataProcessor):
             labels.append(0)
         else:
             # corrupting tail
-            tmp_tail = ''
             while True:
                 tmp_ent_list = set(entities)
                 tmp_ent_list.remove(line[2])
@@ -147,6 +146,25 @@ class KGProcessor(DataProcessor):
             texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
             labels.append(0)
         return texts, labels
+
+    def corrupt_all_head_tail(self, ent2text, entities, line, i, text_a, text_b, text_c):
+        texts = []
+        # corrupting heads
+        head_entities = set(entities)
+        head_entities.remove(line[0])
+        head_entities = list(head_entities)
+        for corrupt_head in head_entities:
+            tmp_head_text = ent2text[corrupt_head]
+            texts.append(self._formulate_string_from_triple(tmp_head_text, text_b, text_c))
+        # corrupting tails
+        tail_entities = set(entities)
+        tail_entities.remove(line[2])
+        tail_entities = list(tail_entities)
+        for corrupt_tail in tail_entities:
+            tmp_tail_text = ent2text[corrupt_tail]
+            texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
+        path = os.path.join(self.caching_dir, f'texts-test-{i}.pkl')
+        serialize_data(texts, path)
 
     def create_datasets(self, data_dir: str) -> Tuple[CustomDataset, CustomDataset, CustomDataset]:
         train_lines = self._read_tsv(os.path.join(data_dir, "train.tsv"))
@@ -206,6 +224,7 @@ class KGProcessor(DataProcessor):
             corrupt_texts, corrupt_labels = self.corrupt_head_tail(self.ent2text, self.entities, line,
                                                                    lines_str_set,
                                                                    head_ent_text, relation_text, tail_ent_text)
+
             texts += corrupt_texts
             labels += corrupt_labels
         return labels, texts
@@ -294,6 +313,7 @@ class HeadTailPredictionProcessor(KGProcessor):
     def __init__(self, tokenizer: str, data_dir: str, caching_dir: str, max_seq_length: int = None):
         super().__init__(tokenizer, data_dir, caching_dir, max_seq_length)
         self.is_training = False
+        self.is_testing = False
 
     def _formulate_string_from_triple(self, text_a: str, text_b: str, text_c: Union[str, None]) -> str:
         return f"[CLS] {text_a} [SEP] {text_b} [SEP] {text_c} [SEP]"
@@ -301,10 +321,12 @@ class HeadTailPredictionProcessor(KGProcessor):
     def transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
         if ds_type == 'train':
             self.is_training = True
+        if ds_type == 'test':
+            self.is_testing = True
         return self._transform_portion_to_dataset(lines, ds_type, load_from_pkl)
 
     def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
-        for (i, line) in enumerate(lines):
+        for i, line in tqdm(enumerate(lines)):
             head_ent_text = self.ent2text[line[0]]
             tail_ent_text = self.ent2text[line[2]]
             relation_text = self.rel2text[line[1]]
@@ -320,7 +342,11 @@ class HeadTailPredictionProcessor(KGProcessor):
                                                                        head_ent_text, relation_text, tail_ent_text)
                 texts += corrupt_texts
                 labels += corrupt_labels
+            if self.is_testing:
+                self.corrupt_all_head_tail(self.ent2text, self.entities, line, i,
+                                           head_ent_text, relation_text, tail_ent_text)
         self.is_training = False
+        self.is_testing = False
         return labels, texts
 
     def which_metrics(self):

@@ -1,6 +1,7 @@
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import numpy as np
 import torch
+from metrics_eval import mrr, hits_at_k
 
 
 def tc_compute_metrics(pred):
@@ -79,6 +80,24 @@ def rp_compute_metrics(pred):
 
 
 def htp_compute_metrics(pred):
+    labels = pred.label_ids
+    preds = pred.predictions.argmax(-1)
+    simple_accuracy = (preds == labels).mean()
+    mrr_value = mrr(labels, preds)
+
+    metrics_with_values = {
+        'simple_accuracy': simple_accuracy,
+        'mean_reciprocal_rank': mrr_value,
+    }
+
+    for k in [1, 3, 10]:
+        hit = hits_at_k(labels, preds, k)
+        metrics_with_values[f'Hits @{k}'] = hit
+
+    return metrics_with_values
+
+
+def htp_compute_metrics_old(pred):
     # run link prediction
     ranks = []
     ranks_left = []
