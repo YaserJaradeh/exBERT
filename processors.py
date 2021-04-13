@@ -4,9 +4,9 @@ import os
 import sys
 import csv
 import random
-from datasets import CustomDataset
+from datasets import CustomDataset, EfficientDataset
 import logging
-import pickle
+from file_utils import serialize_data, deserialize_data
 import metrics
 from tqdm import tqdm
 
@@ -14,14 +14,6 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
                     datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
-
-
-def serialize_data(data: Any, path: str):
-    pickle.dump(data, open(path, "wb"))
-
-
-def deserialize_data(path: str):
-    return pickle.load(open(path, "rb"))
 
 
 class DataProcessor:
@@ -147,24 +139,26 @@ class KGProcessor(DataProcessor):
             labels.append(0)
         return texts, labels
 
-    def corrupt_all_head_tail(self, ent2text, entities, line, i, text_a, text_b, text_c):
+    def corrupt_all_head_tail(self, ent2text, entities, line, text_a, text_b, text_c):
         texts = []
         # corrupting heads
         head_entities = set(entities)
         head_entities.remove(line[0])
         head_entities = list(head_entities)
-        for corrupt_head in head_entities:
+        randomizer = random.Random(12)
+        for corrupt_head in randomizer.sample(head_entities, 20):
             tmp_head_text = ent2text[corrupt_head]
             texts.append(self._formulate_string_from_triple(tmp_head_text, text_b, text_c))
         # corrupting tails
         tail_entities = set(entities)
         tail_entities.remove(line[2])
         tail_entities = list(tail_entities)
-        for corrupt_tail in tail_entities:
+        for corrupt_tail in randomizer.sample(tail_entities, 20):
             tmp_tail_text = ent2text[corrupt_tail]
             texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
-        path = os.path.join(self.caching_dir, f'texts-test-{i}.pkl')
-        serialize_data(texts, path)
+        return texts
+        # path = os.path.join(self.caching_dir, f'texts-test-{i}.pkl')
+        # serialize_data(texts, path)
 
     def create_datasets(self, data_dir: str) -> Tuple[CustomDataset, CustomDataset, CustomDataset]:
         train_lines = self._read_tsv(os.path.join(data_dir, "train.tsv"))
@@ -180,7 +174,7 @@ class KGProcessor(DataProcessor):
     def transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
         return self._transform_portion_to_dataset(lines, ds_type, load_from_pkl)
 
-    def _transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
+    def _transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True, efficient: bool = False) -> CustomDataset:
         texts_path = os.path.join(self.caching_dir, f'texts-{ds_type}.pkl')
         labels_path = os.path.join(self.caching_dir, f'labels-{ds_type}.pkl')
         if load_from_pkl and os.path.exists(texts_path) and os.path.exists(labels_path):
@@ -195,8 +189,13 @@ class KGProcessor(DataProcessor):
             labels, texts = self.process_lines_into_strings(labels, lines, lines_str_set, texts)
             serialize_data(texts, texts_path)
             serialize_data(labels, labels_path)
-        encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
-        return CustomDataset(encodings, labels)
+        if efficient:
+            new_texts, labels, mapper = EfficientDataset.create_short_lists(zip(texts, labels))
+            encodings = self.tokenizer(new_texts, truncation=True, padding=True, max_length=self.max_seq_length)
+            return EfficientDataset(encodings, labels, texts, mapper)
+        else:
+            encodings = self.tokenizer(texts, truncation=True, padding=True, max_length=self.max_seq_length)
+            return CustomDataset(encodings, labels)
 
     def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
         # See child classes for concert definitions
@@ -343,8 +342,10 @@ class HeadTailPredictionProcessor(KGProcessor):
                 texts += corrupt_texts
                 labels += corrupt_labels
             if self.is_testing:
-                self.corrupt_all_head_tail(self.ent2text, self.entities, line, i,
-                                           head_ent_text, relation_text, tail_ent_text)
+                corrupt_texts = self.corrupt_all_head_tail(self.ent2text, self.entities, line,
+                                                           head_ent_text, relation_text, tail_ent_text)
+                texts += corrupt_texts
+                labels += [0] * len(corrupt_texts)
         self.is_training = False
         self.is_testing = False
         return labels, texts

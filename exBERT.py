@@ -97,13 +97,16 @@ def main():
     logger.info("Initialized trainer object")
 
     if args.do_train or args.do_eval:
-        logger.info("Training")
-        trainer.train()
-    if not (args.custom_model is not None and os.path.exists(args.custom_model)):
-        logger.info("Saving model to disk")
-        trainer.save_model(args.output_dir)
+        if args.do_train:
+            logger.info("Training")
+            trainer.train()
+            logger.info("Saving model to disk")
+            trainer.save_model(args.output_dir)
+        elif args.do_eval:
+            logger.info("Evaluation")
+            trainer.evaluate()
     if args.do_predict:
-        logger.info("Predicting")
+        logger.info("Testing")
         results = trainer.predict(test_ds)
         print(results.metrics)
         logger.info("Writing metrics to disk")
