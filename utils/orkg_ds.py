@@ -71,7 +71,7 @@ def _write_entity2text_file(data_dir: str, entities: List[Tuple[str, str]]):
 
 def write_orkg_relations():
     log.info("Fetching predicates from ORKG")
-    orkg_predicates = orkg.predicates.get(items=9999999).content
+    orkg_predicates = orkg.predicates.get(size=9999999).content
     relations = []
     for orkg_predicate in orkg_predicates:
         relations.append(orkg_predicate['id'])
@@ -82,7 +82,7 @@ def write_orkg_relations():
 
 def write_orkg_entities():
     log.info("Fetching resources from ORKG & filtering empty labels")
-    orkg_resources = orkg.resources.get(items=9999999).content
+    orkg_resources = orkg.resources.get(size=9999999).content
     orkg_resources = [r for r in filter(lambda r: len(r['label']) > 0, orkg_resources)]
     log.info("Fetching literals from ORKG & filtering empty labels")
     literals = [l for l in filter(lambda l: len(l['label']) > 0, orkg.literals.get_all().content)]
@@ -97,7 +97,7 @@ def write_orkg_entities():
 
 def write_orkg_statements():
     log.info("Fetching statements from ORKG")
-    orkg_statements = orkg.statements.get(items=100).content
+    orkg_statements = orkg.statements.get(size=100).content
     # ignore literal statements
     log.info("Removing literal statements")
     orkg_statements = filter_out_unwanted_statements(orkg_statements)
@@ -129,7 +129,7 @@ def _get_n_statements_starting_from_x(n_statements: int, x_page: int = 1):
     pages = math.ceil(n_statements / batch_size)
     for page in range(x_page, x_page + pages):
         log.info(f"Fetching statements {page - x_page + 1}/{pages}")
-        result += orkg.statements.get(items=min(n_statements - len(result), batch_size), page=page).content
+        result += orkg.statements.get(size=min(n_statements - len(result), batch_size), page=page).content
     return result, x_page + pages + 1
 
 
