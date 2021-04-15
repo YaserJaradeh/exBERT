@@ -153,53 +153,21 @@ class KGProcessor(DataProcessor):
 
     def corrupt_all_head_tail(self, ent2text, entities, line, text_a, text_b, text_c, corrupt_items=20):
         texts = []
-        randomizer = random.Random(12)
         # corrupting heads
         head_entities = set(entities)
         head_entities.remove(line[0])
         head_entities = list(head_entities)
-        count = 0
-        index = 0
-        while True:
-            if index == len(head_entities):
-                if len(texts) < corrupt_items:
-                    for corrupt_head in randomizer.sample(head_entities, corrupt_items - len(texts)):
-                        tmp_head_text = ent2text[corrupt_head]
-                        texts.append(self._formulate_string_from_triple(tmp_head_text, text_b, text_c))
-                break
-            if count == corrupt_items:
-                break
-            corrupt_head = head_entities[index]
+        randomizer = random.Random(12)
+        for corrupt_head in randomizer.sample(head_entities, 20):
             tmp_head_text = ent2text[corrupt_head]
-            tmp_triple = [tmp_head_text, text_b, text_c]
-            tmp_triple_str = '\t'.join(tmp_triple)
-            if tmp_triple_str in self.all_triples_str_set:
-                texts.append(self._formulate_string_from_triple(tmp_head_text, text_b, text_c))
-                count += 1
-            index += 1
+            texts.append(self._formulate_string_from_triple(tmp_head_text, text_b, text_c))
         # corrupting tails
         tail_entities = set(entities)
         tail_entities.remove(line[2])
         tail_entities = list(tail_entities)
-        count = 0
-        index = 0
-        while True:
-            if index == len(tail_entities):
-                if len(texts) < corrupt_items * 2:
-                    for corrupt_tail in randomizer.sample(tail_entities, (corrupt_items * 2) - len(texts)):
-                        tmp_tail_text = ent2text[corrupt_tail]
-                        texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
-                break
-            if count == corrupt_items * 2:
-                break
-            corrupt_tail = tail_entities[index]
+        for corrupt_tail in randomizer.sample(tail_entities, 20):
             tmp_tail_text = ent2text[corrupt_tail]
-            tmp_triple = [text_a, text_b, tmp_tail_text]
-            tmp_triple_str = '\t'.join(tmp_triple)
-            if tmp_triple_str in self.all_triples_str_set:
-                texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
-                count += 1
-            index += 1
+            texts.append(self._formulate_string_from_triple(text_a, text_b, tmp_tail_text))
         return texts
 
     def corrupt_all_relations(self, ent2text, entities, line, text_a, text_b, text_c, corrupt_items=20):
@@ -370,11 +338,6 @@ class RelationPredictionProcessor(KGProcessor):
 
     def _formulate_string_from_triple(self, text_a: str, text_b: str, text_c: Union[str, None]) -> str:
         return f"[CLS] {text_a} [SEP] {text_b} [SEP]"
-
-    def transform_portion_to_dataset(self, lines: List, ds_type: str, load_from_pkl: bool = True) -> CustomDataset:
-        if ds_type == 'test':
-            self.is_testing = True
-        return self._transform_portion_to_dataset(lines, ds_type, load_from_pkl)
 
     def process_lines_into_strings(self, labels, lines, lines_str_set, texts) -> Tuple[List[str], List[Any]]:
 

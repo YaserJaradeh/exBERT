@@ -105,7 +105,7 @@ def main():
             trainer.train()
             logger.info("Saving model to disk")
             trainer.save_model(args.output_dir)
-        elif args.do_eval:
+        if args.do_eval:
             logger.info("Evaluation")
             trainer.evaluate()
     if args.do_predict:
