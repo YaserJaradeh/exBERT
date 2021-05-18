@@ -106,7 +106,7 @@ def main():
             logger.info("Saving model to disk")
             trainer.save_model(args.output_dir)
         if args.do_eval:
-            logger.info("Evaluation")
+            logger.info("Evaluating")
             trainer.evaluate()
     if args.do_predict:
         logger.info("Testing")
