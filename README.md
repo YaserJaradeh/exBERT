@@ -20,7 +20,7 @@ First you need to download all the required packages
 $ pip install -r requirements.txt
 ```
 
-To run the **KG-BERT** scripts, you need to run the following command
+To run the **exBERT** scripts, you need to run the following command
 
 Changing the parameters determines what task to perform on which datasets and what hyperparameters.
 
