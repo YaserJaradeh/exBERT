@@ -20,35 +20,26 @@ First you need to download all the required packages
 $ pip install -r requirements.txt
 ```
 
-To run the **KG-BERT** scripts, you need to run the following commands
+To run the **KG-BERT** scripts, you need to run the following command
 
-* To run on the PWC21 dataset
+Changing the parameters determines what task to perform on which datasets and what hyperparameters.
+
+An example how to run UMLS with Sci-BERT on link prediction task is:
 ```bash
-$ python3 run_exBERT_triple_classifier.py \
-      --do_train \
-      --do_eval  \
-      --do_predict  \
-      --data_dir ./datasets/PWC21  \
-      --bert_model bert-base-uncased  \
-      --max_seq_length 300  \
-      --train_batch_size 32  \
-      --learning_rate 5e-5  \
-      --num_train_epochs 3.0  \
-      --output_dir ./output_PWC21/   \
-      --gradient_accumulation_steps 1  \
-      --eval_batch_size 512 \
-      --fp16
+python3 exBERT.py --task htp \
+     --do_train \
+     --do_eval \
+     --do_predict \
+     --data_dir ./data/UMLS \
+     --bert_model allenai/scibert_scivocab_uncased \
+     --max_seq_length 15 \
+     --train_batch_size 32 \
+     --learning_rate 5e-5 \
+     --num_train_epochs 8.0 \
+     --output_dir ./output_UMLS/ \
+     --gradient_accumulation_steps 1 \
+     --eval_batch_size 135 \
+     --fp16
 ```
 
-## Datasets
-- ORKG ✔
-- PWC ✔
-- MAG 😕
-- UMLS ❓
 
-## Baselines
-- KG-embeddings 😕
-  - TransE
-  - TransH
-  - ...
-- KG-BERT ✔

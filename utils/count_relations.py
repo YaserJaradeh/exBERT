@@ -57,7 +57,7 @@ def print_stats(relation_types):
 
 
 if __name__ == '__main__':
-    path = '/media/jaradeh/HDD/exBERT/baselines/kgembed/data/pwc.tsv'
+    path = './orkg.tsv'
     triples = read_aggregated_file(path)
     sources = dict()
     destinations = dict()
@@ -97,19 +97,19 @@ if __name__ == '__main__':
         for s in set(connections['s']):
             if len(sources[s][relation]) > 1:
                 to_N = True
-            if len(sources[s][relation]) == 1:
+            elif len(sources[s][relation]) == 1:
                 to_One = True
             for d in set(connections['d']):
                 if len(destinations[d][relation]) > 1:
                     N_to = True
-                if len(destinations[d][relation]) == 1:
+                elif len(destinations[d][relation]) == 1:
                     One_to = True
                 assign_relation_type(convert_to_enum(N_to, One_to, to_N, to_One), relation_types, relation)
+                # Stop working stop and continue to next relation
                 if relation_types[relation] == RelationType.N_2_N:
-                    # Stop working stop and continue to next relation
                     print(f'Early stopping on relation: {relation}')
                     break
-        print_stats(relation_types)
+        # print_stats(relation_types)
 
     print_stats(relation_types)
 
